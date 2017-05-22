@@ -44,8 +44,25 @@
             </div>
             <div class="card-action">
               <a href="#" id='btn-login-field'>Entrar</a>
-              <a href="#">Esqueci a senha</a>
+                <!-- Modal Trigger -->
+              <a id="btn-modal" href="#!">Esqueci a Senha</a>
+               <!-- Modal Structure -->
+        <div id="modalSenha" class="modal">
+            <div class="modal-content">
+            <h4>Esqueceu sua senha?</h4>
+            <p>Clique em enviar para que o link de reset de senha seja enviado para o seu email.</p>
             </div>
+        <div class="row">
+            <div class="col s8">
+            E-mail:<input type="text" id="email-field"/>
+            <label for="email-field"></label>
+            </div>
+        </div>
+            <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="btn-reset">Enviar</a>
+            </div>
+        </div>
+                    </div>
           </div>
         </div>
       </div>

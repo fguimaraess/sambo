@@ -2,7 +2,10 @@ var pageIndex = {
     loginField: document.querySelector('#login-field'),
     passwordField: document.querySelector('#password-field'),
     btnEntrar: document.querySelector('#btn-login-field'),
-    database: firebase.database()
+    btnEsqueciSenha: document.querySelector('#btn-modal'),
+    database: firebase.database(),
+    btnReset: document.querySelector('#btn-reset'),
+    emailField: document.querySelector('#email-field')
 }
 
 pageIndex.btnEntrar.addEventListener('click', function(){
@@ -37,6 +40,30 @@ pageIndex.btnEntrar.addEventListener('click', function(){
     });
     var user = firebase.auth().currentUser;
 })
+
+pageIndex.btnReset.addEventListener('click', function(){
+    var auth = firebase.auth();
+    var email = pageIndex.emailField.value
+
+    auth.sendPasswordResetEmail(email).then(function(){
+        swal('', 'Email enviado com sucesso', 'success')
+    },
+    function(error){
+        swal('', "Erro: " + error, 'error')
+    }
+     );
+});
+
+$(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal').modal();
+  });
+
+  pageIndex.btnEsqueciSenha.addEventListener('click', function(){
+    $('#modalSenha').modal('open');
+  });
+     
+
 
 
 //MÉTODO PARA CADASTRAR USUARIO
