@@ -1,0 +1,10 @@
+body{
+  background-size: cover;
+  background-color: lightblue;
+}
+
+.login-card{
+  padding-left: 20% !important;
+  padding-right: 10% !important;
+  padding-top: 5% !important;
+}

@@ -1,0 +1,11 @@
+.padawan{
+    font-color: blue;
+    font-size: 50px;
+    font-family: Tahoma;
+    padding-top: 10%;
+    padding-left: 30%;
+}
+
+body {
+    background-color: lightblue;
+}
