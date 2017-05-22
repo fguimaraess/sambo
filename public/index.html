@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="/manifest.json">
+    <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+    <script src="js/firebase.js" charset="utf-8"></script>
+    <title>Sis-Atleta</title>
+    <link rel="shortcut icon" href="img/favicon.ico" />
+    <link rel="apple-touch-icon" href="img/icon-app.png"/>
+    <link rel="icon" href="img/icon-app.png"/>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/css/index.css">
+    <script src="js/sweetalert.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="css/sweetalert.css"> </head>
+
+<body>
+    <div class="row">
+        <div class="col s12 login-card">
+            <div class="card z-depth-7">
+                <div class="card-content">
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12"> <i class="material-icons prefix">email</i>
+                                    <input id="email-field" type="text" class="validate" placeholder="">
+                                    <label for="email">Email</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12"> <i class="material-icons prefix">lock_outline</i>
+                                    <input id="password-field" type="password" class="validate" placeholder="">
+                                    <label for="password">Senha</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12 right-align"> <span>Esqueceu sua senha? Clique<a href="#forgot-btn" class="green-text"> aqui</a>!</span> </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card-action"> <a href="#" class="black-text" id="login-btn">Login</a> <a href="#" class="black-text" id="register-btn">Cadastre-se</a>
+                    <!--Modal Reset de Senha -->
+                    <div id="forgot-btn" class="modal">
+                        <div class="modal-content">
+                            <h4>Esqueceu sua senha?</h4>
+                            <p>Digite seu e-mail abaixo e nós lhe enviaremos um link para que você redefina sua senha.</p>
+                            <div class="input-field col s12"> <i class="material-icons prefix">email</i>
+                                <input id="resetemail-field" type="text" class="validate">
+                                <label for="email">Email</label>
+                            </div>
+                        </div>
+                        <div class="modal-footer" id="reset-btn"> <a href="#!" class="modal-action waves-effect waves-green btn-flat">Enviar</a> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<footer>
+    <script src="js/index.js" charset="utf-8"></script>
+</footer>
+
+</html>
