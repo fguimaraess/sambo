@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
     <script src="js/firebase.js" charset="utf-8"></script>
     <title>Sambô</title>
 
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
@@ -18,11 +19,36 @@
     <link rel="stylesheet" href="css/sweetalert.css"> </head>
 
 <body>
-    <div class="padawan" id="padawan">
-        CALMA, JOVEM PADAWAN!!!
+    <!--Espaço da Logo-->
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Sambô</a>
+        </div>
+    </nav>
+
+    <!--Menu Lateral-->
+    <div class="row" style="padding-top: 30px;">
+        <div id="menu-lateral" class="col s3">
+            <ul class="collection">
+                <a href="#" class="collection-item" id="menu-dashboard">Dashboard</a>
+                <a href="#" class="collection-item" id="socios-dashboard">Sócios</a>
+                <a href="#" class="collection-item" id="pagamentos-dashboard">Pagamentos</a>
+                <a href="#" class="collection-item" id="relatorios-dashboard">Relatórios</a>
+            </ul>
+        </div>
+        <div id="content-page" class="col s9">
+            <div class="padawan" id="padawan">
+                CALMA, JOVEM PADAWAN!!!
+            </div>
+
+        </div>
     </div>
+
+
+
 
 </body>
 <footer>
 </footer>
+
 </html>

@@ -1,5 +1,5 @@
-.padawan{
-    font-color: blue;
+.padawan {
+    color: gray;
     font-size: 50px;
     font-family: Tahoma;
     padding-top: 10%;
@@ -8,4 +8,16 @@
 
 body {
     background-color: lightblue;
+}
+
+.collection a.collection-item {
+    color: gray;
+}
+
+nav {
+    background-color: lightblue
+}
+
+nav .brand-logo {
+    color: gray;
 }
