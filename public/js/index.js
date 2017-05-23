@@ -62,9 +62,19 @@ $(document).ready(function(){
   pageIndex.btnEsqueciSenha.addEventListener('click', function(){
     $('#modalSenha').modal('open');
   });
-     
 
 
+//usar enter para logar
+pageIndex.passwordField.addEventListener('keyup', function (event) {
+    event.preventDefault();
+     if (event.keyCode == 13) pageIndex.btnEntrar.click();
+});
+
+//usar enter para o reset de sennha
+pageIndex.emailField.addEventListener('keyup', function (event) {
+    event.preventDefault();
+    if (event.keyCode == 13) pageIndex.btnReset.click();
+});
 
 //MÉTODO PARA CADASTRAR USUARIO
 /*
