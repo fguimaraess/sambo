@@ -8,3 +8,7 @@ body{
   padding-right: 10% !important;
   padding-top: 5% !important;
 }
+
+.card .card-action #btn-login-field, #btn-modal {
+  color: white;
+}
