@@ -19,27 +19,50 @@
     <link rel="stylesheet" href="css/sweetalert.css"> </head>
 
 <body>
+    <!-- Estrutura Dropdown -->
+    <ul id="dropdown1" class="dropdown-content">
+        <li><a href="#!" id="btn-logout">Logout</a></li>
+    </ul>
+
     <!--Espaço da Logo-->
     <nav>
         <div class="nav-wrapper">
             <a href="#" class="brand-logo">Sambô</a>
+                <ul class="right hide-on-med-and-down">
+                    <!--Dropdown Trigger-->
+                    <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Usuário<i class="material-icons right">arrow_drop_down</i></a></li>
+                </ul>
         </div>
     </nav>
 
-    <!--Menu Lateral-->
-    <div class="row" style="padding-top: 30px;">
-        <div id="menu-lateral" class="col s3">
-            <ul class="collection">
-                <a href="#" class="collection-item" id="menu-dashboard">Dashboard</a>
-                <a href="#" class="collection-item" id="socios-dashboard">Sócios</a>
-                <a href="#" class="collection-item" id="pagamentos-dashboard">Pagamentos</a>
-                <a href="#" class="collection-item" id="relatorios-dashboard">Relatórios</a>
-            </ul>
-        </div>
+        <div class="row" style="padding-top: 30px;">
+            <!--Menu Lateral-->       
+                    <div id="menu-lateral" class="col s3">
+                        <ul class="collection">
+                            <a href="#" class="collection-item" id="socios-dashboard">Sócios</a>
+                            <a href="#" class="collection-item" id="pagamentos-dashboard">Pagamentos</a>
+                            <a href="#" class="collection-item" id="relatorios-dashboard">Relatórios</a>
+                        </ul>
+                    </div>
+               
+
         <div id="content-page" class="col s9">
-            <div class="padawan" id="padawan">
-                CALMA, JOVEM PADAWAN!!!
+
+
+            <div class="socio-div" hidden>
+                ALIBABA
             </div>
+
+            <div class="pagamento-div" hidden>
+                FODA_SE
+            </div>
+
+            <div class="relatorio-div" hidden>
+                QUERO
+            </div>
+
+
+
 
         </div>
     </div>
@@ -49,6 +72,8 @@
 
 </body>
 <footer>
+    <script src="js/dashboard.js" charset="utf-8"></script>
+    <script src="js/socio.js" charset="utf-8"></script>
 </footer>
 
 </html>

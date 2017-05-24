@@ -1,23 +1,18 @@
-.padawan {
-    color: gray;
-    font-size: 50px;
-    font-family: Tahoma;
-    padding-top: 10%;
-    padding-left: 30%;
-}
-
 body {
     background-color: lightblue;
 }
 
 .collection a.collection-item {
-    color: gray;
+    color: white;
+    background-color: #607d8b;
 }
 
 nav {
-    background-color: lightblue
+    background-color: #607d8b
+
 }
 
 nav .brand-logo {
-    color: gray;
+    color: white;
 }
+

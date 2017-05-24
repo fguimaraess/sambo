@@ -9,6 +9,6 @@ body{
   padding-top: 5% !important;
 }
 
-.card .card-action #btn-login-field, #btn-modal {
+#btn-login-field, #btn-modal{
   color: white;
 }
