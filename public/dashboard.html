@@ -28,120 +28,124 @@
     <nav>
         <div class="nav-wrapper">
             <a href="#" id="logo-sambo" class="brand-logo">Sambô</a>
-                <ul class="right hide-on-med-and-down">
-                    <!--Dropdown Trigger-->
-                    <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Usuário<i class="material-icons right">arrow_drop_down</i></a></li>
-                </ul>
+            <ul class="right hide-on-med-and-down">
+                <!--Dropdown Trigger-->
+                <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Usuário<i class="material-icons right">arrow_drop_down</i></a></li>
+            </ul>
         </div>
     </nav>
 
-        <div class="row" style="padding-top: 30px;">
-            <!--Menu Lateral-->       
-                    <div id="menu-lateral" class="col s3">
-                        <ul class="collection">
-                            <a href="#" class="collection-item" id="socios-dashboard">Sócios</a>
-                            <a href="#" class="collection-item" id="pagamentos-dashboard">Pagamentos</a>
-                            <a href="#" class="collection-item" id="relatorios-dashboard">Relatórios</a>
-                        </ul>
-                    </div>
-               
+    <div class="row" style="padding-top: 30px;">
+        <!--Menu Lateral-->
+        <div id="menu-lateral" class="col s3">
+            <ul class="collection">
+                <a href="#" class="collection-item" id="socios-dashboard">Sócios</a>
+                <a href="#" class="collection-item" id="pagamentos-dashboard">Pagamentos</a>
+                <a href="#" class="collection-item" id="relatorios-dashboard">Relatórios</a>
+            </ul>
+        </div>
+
 
         <div id="content-page" class="col s9">
 
 
             <div class="socio-div" hidden>
                 SÓCIOS
-                <div class="row">
-                    <div class="col s12">
-                        <div class="input-field col s8">
-                            <input type="text" id="busca-socio-field" class="validate">
-                            <label class="active" for="busca-socio-field">
+                <div id="campos-socio">
+                    <div class="row" id="busquinha">
+                        <div class="col s12">
+                            <div class="input-field col s8">
+                                <input type="text" id="busca-socio-field" class="validate">
+                                <label class="active" for="busca-socio-field">
                                 Buscar Sócio
                                 </label>
-                        </div>
-                        <div class="input-field col s1">
-                        <a href="#" class="btn-floating btn-small waves-effect waves-light blue-grey" id="busca-socio-btn">
-                            <i class="material-icons">search</i>
-                        </a>
-                        </div>
-                    
-                    <div class="input-field col s1">
-                        <a href="#" class="btn-floating btn-small waves-effect waves-light blue-grey" id="apagar-socio-btn">
-                            <i class="material-icons">clear</i>
-                        </a>
+                            </div>
+                            <div class="input-field col s1">
+                                <a href="#" class="btn-floating btn-small waves-effect waves-light blue-grey" id="busca-socio-btn">
+                                    <i class="material-icons">search</i>
+                                </a>
+                            </div>
+
+                            <div class="input-field col s1">
+                                <a href="#" class="btn-floating btn-small waves-effect waves-light blue-grey" id="apagar-socio-btn">
+                                    <i class="material-icons">clear</i>
+                                </a>
+                            </div>
                         </div>
                     </div>
+                    <table class="display highlight" id="table-socio">
+                        <thead>
+                            <tr id="linha-id">
+                                <th id="id" hidden>ID</th>
+                                <th id="cpf">CPF</th>
+                                <th id="nome">Nome</th>
+                                <th id="email">Email</th>
+                                <th id="telefone">Telefone</th>
+                                <th id="dtnascimento">Data de Nascimento</th>
+                                <th id="ultimopagto">Último Pagto</th>
+                            </tr>
+                        </thead>
+                        <tbody id="body-socio">
+                            <tr id="idDosSocios">
+                                <td hidden>1</td>
+                                <td>012588897605</td>
+                                <td>Gohan</td>
+                                <td>juanpessanha@mailinator.com</td>
+                                <td>999999999</td>
+                                <td>10/04/1998</td>
+                                <td>08/05/2017</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="right-align">
+                        <a class="btn-floating btn-large waves-effect waves-light blue-grey" href="#" id="addSocio">
+                            <i class="material-icons">add</i>
+                        </a>
+                    </div>
                 </div>
-                <table class="display highlight" id="table-socio">
-                    <thead>
-                        <tr id="linha-id">
-                            <th id="id" hidden>ID</th>
-                            <th id="cpf">CPF</th>
-                            <th id="nome">Nome</th>
-                            <th id="email">Email</th>
-                            <th id="telefone">Telefone</th>
-                            <th id="dtnascimento">Data de Nascimento</th>
-                        </tr>
-                    </thead>
-                    <tbody id="body-socio">
-                        <tr id="idDosSocios">
-                            <td hidden>1</td>
-                            <td>012588897605</td>
-                            <td>Gohan</td>
-                            <td>juanpessanha@mailinator.com</td>
-                            <td>999999999</td>
-                            <td>10/04/1998</td>
-                        </tr>
-                    </tbody>
-                </table>
-            <div class="right-align">
-                <a class="btn-floating btn-large waves-effect waves-light blue-grey" href="#" id="addSocio">
-                    <i class="material-icons">add</i>
-                </a>
-            </div>
-        </div>
-        <div class="row" id="cardAddsocio" hidden>
+                <div class="row" id="cardAddsocio" hidden>
                     <div class="col s12 m6">
                         <div class="card blue-grey darken-1">
                             <div class="card-content white-text">Cadastrar Sócio
                                 <div class="row">
                                     <form class="col s12">
                                         <div class="row">
-                                                    <div class="input-field col s12">
-                                                        <input type="text" id="nomecompleto-socio" class="validate">
-                                                        <label class="active" for="nomecompleto-socio">Nome Completo</label>
-                                                    </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="input-field col s6">
-                                                        <input type="number" id="cpf-field" class="validate">
-                                                        <label class="active" for="cpf-field">CPF</label>
-                                            </div>
-                                            <div class="input-field col s6">
-                                                        <input type="text" id="email-field" class="validate">
-                                                        <label class="active" for="email-field">Email</label>
+                                            <div class="input-field col s12">
+                                                <input type="text" id="nomesocio-field" class="validate">
+                                                <label class="active" for="nomesocio-field">Nome Completo</label>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s6">
-                                                <input type="text" id="telefone-field" class"validate">
+                                                <input type="number" id="cpf-field" class="validate">
+                                                <label class="active" for="cpf-field">CPF</label>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <input type="text" id="email-field" class="validate">
+                                                <label class="active" for="email-field">Email</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s6">
+                                                <input type="text" id="telefone-field" class "validate">
                                                 <label class="active" for="telefone-field">Telefone</label>
                                             </div>
                                             <div class="input-field col s6">
-                                                <input type="date" id="datanascimento-field" class="datepicker">
+                                                <input type="text" readonly id="datanascimento-field" class="datepicker">
                                                 <label class="active" for="datanascimento-field">Data de Nascimento</label>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
-                        </div>
-                                <div class="card-action">
-                                    <a href="#" id="save-card-socio">Salvar</a>
-                                    <a href="#" id="cancel-card-socio">Cancelar</a>
-                                </div>
+                            </div>
+                            <div class="card-action">
+                                <a href="#" id="save-card-socio">Salvar</a>
+                                <a href="#" id="cancel-card-socio">Cancelar</a>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
             <div class="pagamento-div" hidden>
                 PAGAMENTOS
@@ -155,15 +159,15 @@
                                 </label>
                         </div>
                         <div class="input-field col s1">
-                        <a href="#" class="btn-floating btn-small waves-effect waves-light blue-grey" id="busca-pgto-btn">
-                            <i class="material-icons">search</i>
-                        </a>
+                            <a href="#" class="btn-floating btn-small waves-effect waves-light blue-grey" id="busca-pgto-btn">
+                                <i class="material-icons">search</i>
+                            </a>
                         </div>
-                    
-                    <div class="input-field col s1">
-                        <a href="#" class="btn-floating btn-small waves-effect waves-light blue-grey" id="apagar-pgto-btn">
-                            <i class="material-icons">clear</i>
-                        </a>
+
+                        <div class="input-field col s1">
+                            <a href="#" class="btn-floating btn-small waves-effect waves-light blue-grey" id="apagar-pgto-btn">
+                                <i class="material-icons">clear</i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -194,14 +198,11 @@
                     </a>
                 </div>
             </div>
-        
-            
+
+
             <div class="relatorio-div" hidden>
                 RELATÓRIOS
             </div>
-
-
-
 
         </div>
     </div>
