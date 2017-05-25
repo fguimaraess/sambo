@@ -67,3 +67,7 @@ pageDash.birthDate.addEventListener('click', function(){
     format: 'dd/mm/yyyy'
  });
 })
+
+$(document).ready(function() {
+    //$('#table-socio').DataTable();
+} );
