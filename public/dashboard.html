@@ -27,7 +27,7 @@
     <!--Espaço da Logo-->
     <nav>
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo">Sambô</a>
+            <a href="#" id="logo-sambo" class="brand-logo">Sambô</a>
                 <ul class="right hide-on-med-and-down">
                     <!--Dropdown Trigger-->
                     <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Usuário<i class="material-icons right">arrow_drop_down</i></a></li>
@@ -60,13 +60,13 @@
                                 </label>
                         </div>
                         <div class="input-field col s1">
-                        <a href="#" class="btn-floating btn-small waves-effect waves-light lightsagreen" id="busca-socio-btn">
+                        <a href="#" class="btn-floating btn-small waves-effect waves-light blue-grey" id="busca-socio-btn">
                             <i class="material-icons">search</i>
                         </a>
                         </div>
                     
                     <div class="input-field col s1">
-                        <a href="#" class="btn-floating btn-small waves-effect waves-light lightsagreen" id="apagar-socio-btn">
+                        <a href="#" class="btn-floating btn-small waves-effect waves-light blue-grey" id="apagar-socio-btn">
                             <i class="material-icons">clear</i>
                         </a>
                         </div>
@@ -94,7 +94,54 @@
                         </tr>
                     </tbody>
                 </table>
+            <div class="right-align">
+                <a class="btn-floating btn-large waves-effect waves-light blue-grey" href="#" id="addSocio">
+                    <i class="material-icons">add</i>
+                </a>
             </div>
+        </div>
+        <div class="row" id="cardAddsocio" hidden>
+                    <div class="col s12 m6">
+                        <div class="card blue-grey darken-1">
+                            <div class="card-content white-text">Cadastrar Sócio
+                                <div class="row">
+                                    <form class="col s12">
+                                        <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input type="text" id="nomecompleto-socio" class="validate">
+                                                        <label class="active" for="nomecompleto-socio">Nome Completo</label>
+                                                    </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s6">
+                                                        <input type="number" id="cpf-field" class="validate">
+                                                        <label class="active" for="cpf-field">CPF</label>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                        <input type="text" id="email-field" class="validate">
+                                                        <label class="active" for="email-field">Email</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s6">
+                                                <input type="text" id="telefone-field" class"validate">
+                                                <label class="active" for="telefone-field">Telefone</label>
+                                            </div>
+                                            <div class="input-field col s6">
+                                                <input type="date" id="datanascimento-field" class="datepicker">
+                                                <label class="active" for="datanascimento-field">Data de Nascimento</label>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                        </div>
+                                <div class="card-action">
+                                    <a href="#" id="save-card-socio">Salvar</a>
+                                    <a href="#" id="cancel-card-socio">Cancelar</a>
+                                </div>
+                        </div>
+                    </div>
+                </div>
 
             <div class="pagamento-div" hidden>
                 PAGAMENTOS
@@ -108,13 +155,13 @@
                                 </label>
                         </div>
                         <div class="input-field col s1">
-                        <a href="#" class="btn-floating btn-small waves-effect waves-light lightsagreen" id="busca-pgto-btn">
+                        <a href="#" class="btn-floating btn-small waves-effect waves-light blue-grey" id="busca-pgto-btn">
                             <i class="material-icons">search</i>
                         </a>
                         </div>
                     
                     <div class="input-field col s1">
-                        <a href="#" class="btn-floating btn-small waves-effect waves-light lightsagreen" id="apagar-pgto-btn">
+                        <a href="#" class="btn-floating btn-small waves-effect waves-light blue-grey" id="apagar-pgto-btn">
                             <i class="material-icons">clear</i>
                         </a>
                         </div>
@@ -141,8 +188,14 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="right-align">
+                    <a class="btn-floating btn-large waves-effect waves-light blue-grey" href="#" id="addPagto">
+                        <i class="material-icons">add</i>
+                    </a>
+                </div>
             </div>
-
+        
+            
             <div class="relatorio-div" hidden>
                 RELATÓRIOS
             </div>
