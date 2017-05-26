@@ -11,9 +11,9 @@ var pageDash = {
 pageDash.btnSocio.addEventListener('click', function () {
     $('.socio-div').show();
     $('#campos-socio').show();
+    $('#cardAddsocio').hide();
     $('.pagamento-div').hide();
     $('.relatorio-div').hide();
-    $('#cardAddsocio').hide();
 });
 
 pageDash.btnPgto.addEventListener('click', function () {
