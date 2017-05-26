@@ -19,7 +19,7 @@ window.addEventListener('load', getSocio);
 
 pageSocio.btnCancelar.addEventListener('click', function () {
     $('.socio-div').show();
-    $('#campos-socio').show();  
+    $('#campos-socio').show();
     $('#cardAddsocio').hide();
 })
 
@@ -42,6 +42,9 @@ function novoSocio(tempSocio) {
     } else {
         swal("", "Sócio cadastrado com sucessso", "success");
         firebase.database().ref('socios/').push(tempSocio);
+        $('.socio-div').show();
+        $('#campos-socio').show();
+        $('#cardAddsocio').hide();
     }
 }
 
