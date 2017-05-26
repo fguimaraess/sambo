@@ -7,9 +7,15 @@ var pageSocio = {
     dataNascimentoField: document.querySelector('#datanascimento-field'),
     btnSalvar: document.querySelector('#save-card-socio'),
     btnCancelar: document.querySelector('#cancel-card-socio'),
-    bodySocio: document.querySelector('#body-socio')
+    bodySocio: document.querySelector('#body-socio'),
+    btnSocioMenu: document.querySelector('#socios-dashboard')
 }
 window.addEventListener('load', getSocio);
+
+//pageSocio.btnSocioMenu.addEventListener('click', function(){
+//faz isso
+//getSocio();
+//})
 
 pageSocio.btnCancelar.addEventListener('click', function () {
     $('.socio-div').show();

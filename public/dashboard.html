@@ -17,9 +17,9 @@
     <link rel="stylesheet" href="/css/dashboard.css">
     <script src="js/sweetalert.min.js" charset="utf-8"></script>
     <link rel="stylesheet" href="css/sweetalert.css"> </head>
-    <!-- Adciona datatable -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
-    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js" charset="utf-8"></script>
+<!-- Adciona datatable -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js" charset="utf-8"></script>
 
 <body>
     <!-- Estrutura Dropdown -->
@@ -109,7 +109,7 @@
                     </div>
                 </div>
                 <div class="row" id="cardAddsocio" hidden>
-                    <div class="col s12 m6">
+                    <div class="col s12 m9">
                         <div class="card blue-grey darken-1">
                             <div class="card-content white-text">Cadastrar Sócio
                                 <div class="row">
@@ -154,63 +154,95 @@
 
             <div class="pagamento-div" hidden>
                 PAGAMENTOS
-
-                <div class="row">
-                    <div class="col s12">
-                        <div class="input-field col s8">
-                            <input type="text" id="busca-pgto-field" class="validate">
-                            <label class="active" for="busca-pgto-field">
+                <div id="campos-Pgto">
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="input-field col s8">
+                                <input type="text" id="busca-pgto-field" class="validate">
+                                <label class="active" for="busca-pgto-field">
                                 Buscar Pagamento
                                 </label>
-                        </div>
-                        <div class="input-field col s1">
-                            <a href="#" class="btn-floating btn-small waves-effect waves-light blue-grey" id="busca-pgto-btn">
-                                <i class="material-icons">search</i>
-                            </a>
-                        </div>
+                            </div>
+                            <div class="input-field col s1">
+                                <a href="#" class="btn-floating btn-small waves-effect waves-light blue-grey" id="busca-pgto-btn">
+                                    <i class="material-icons">search</i>
+                                </a>
+                            </div>
 
-                        <div class="input-field col s1">
-                            <a href="#" class="btn-floating btn-small waves-effect waves-light blue-grey" id="apagar-pgto-btn">
-                                <i class="material-icons">clear</i>
-                            </a>
+                            <div class="input-field col s1">
+                                <a href="#" class="btn-floating btn-small waves-effect waves-light blue-grey" id="apagar-pgto-btn">
+                                    <i class="material-icons">clear</i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="display highlight" id="table-pgto">
+                        <thead>
+                            <tr id="linha-id">
+                                <th id="id" hidden>ID</th>
+                                <th id="nome-cliente">Nome do Cliente</th>
+                                <th id="valor">Valor</th>
+                                <th id="mes">Mês referente</th>
+                                <th id="dtpgto">Data do Pgto</th>
+                            </tr>
+                        </thead>
+                        <tbody id="body-pgto">
+                            <tr id="idDosPgtos">
+                                <td hidden>1</td>
+                                <td>Gohan</td>
+                                <td>R$0,01</td>
+                                <td>Maio</td>
+                                <td>10/05/2017</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="right-align">
+                        <a class="btn-floating btn-large waves-effect waves-light blue-grey" href="#" id="addPagto">
+                            <i class="material-icons">add</i>
+                        </a>
+                    </div>
+                </div>
+                <div class="row" id="cardAddPgto" hidden>
+                    <div class="col s12 m9">
+                        <div class="card blue-grey darken-1">
+                            <div class="card-content white-text">Cadastrar Pagamento
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        <input type="text" id="socioPgto-field" class="validate">
+                                        <label class="active" for="socioPgto-field">CPF do sócio</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <input type="text" id="valor-field" class="validate">
+                                        <label class="active" for="valor-field"> Valor do Pagamento</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        <input type="text" id="referente-field" class="active">
+                                        <label class="active" for="referente-field">Mês/Ano referente</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <input type="text" id="datePgto-field" class="validate">
+                                        <label class="active" for="datePgto-Field">Data do Pagamento</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-action">
+                                <a href="#" id="save-card-Pgto">Salvar</a>
+                                <a href="#" id="cancel-card-Pgto">Cancelar</a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <table class="display highlight" id="table-pgto">
-                    <thead>
-                        <tr id="linha-id">
-                            <th id="id" hidden>ID</th>
-                            <th id="nome-cliente">Nome do Cliente</th>
-                            <th id="valor">Valor</th>
-                            <th id="mes">Mês referente</th>
-                            <th id="dtpgto">Data do Pgto</th>
-                        </tr>
-                    </thead>
-                    <tbody id="body-pgto">
-                        <tr id="idDosPgtos">
-                            <td hidden>1</td>
-                            <td>Gohan</td>
-                            <td>R$0,01</td>
-                            <td>Maio</td>
-                            <td>10/05/2017</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="right-align">
-                    <a class="btn-floating btn-large waves-effect waves-light blue-grey" href="#" id="addPagto">
-                        <i class="material-icons">add</i>
-                    </a>
+
+                <div class="relatorio-div" hidden>
+                    RELATÓRIOS
                 </div>
+
             </div>
-
-
-            <div class="relatorio-div" hidden>
-                RELATÓRIOS
-            </div>
-
         </div>
-    </div>
 
 
 
