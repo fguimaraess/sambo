@@ -29,7 +29,7 @@ pageSocio.btnBuscaSocio.addEventListener('click', function () {
 
 //Apagar busca
 pageSocio.btnClearSocio.addEventListener('click', function () {
-    pageSocio.btnBuscaSocio.value = "";
+    pageSocio.buscaSocio.value = "";
     getSocioPorNome(pageSocio.buscaSocio.value);
 });
 
