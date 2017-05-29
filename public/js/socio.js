@@ -59,7 +59,7 @@ pageSocio.btnSalvar.addEventListener('click', function () {
 
     if (pageSocio.idSocioField.value) {
         salvaAlteracoes(tempSocio);
-        console.log("O ID É ESSE AQUI: " + pageSocio.idSocioField.value)
+        console.log(tempSocio)
     } else {
         novoSocio(tempSocio);
     }
@@ -80,18 +80,21 @@ function novoSocio(tempSocio) {
 }
 
 function salvaAlteracoes(tempSocio) {
-    socioSel = pageSocio.socios[pageSocio.idSocioField.value];
+    idSocio = pageSocio.idSocioField.value;
+    //socioSel = pageSocio.socios[pageSocio.idSocioField.value];
     //Doc do firebase pra atualizar
-    firebase.database().ref('socios/' + pageSocio.idSocioField.value).update(tempSocio).then(swal("", "cadastro atualizado com sucesso", "success"));
-
+    firebase.database().ref('socios/' + idSocio).update(tempSocio).then(swal("", "cadastro atualizado com sucesso", "success"));
+    console.log(tempSocio)
+    pageSocio.socios[idSocio] = tempSocio;
     //Atualiza tela de sócios
     var sociosNaTela = document.querySelectorAll('.sociosTabela');
     sociosNaTela.forEach(function (socioHtml){
-        if (socioHtml.id == pageSocio.idSocioField.value){
+        if (socioHtml.id == idSocio){
             socioHtml.querySelector('.nomeSocio').innerHTML = tempSocio.nome;
             socioHtml.querySelector('.cpfSocio').innerHTML = tempSocio.cpf;
             socioHtml.querySelector('.emailSocio').innerHtml = tempSocio.email;
             socioHtml.querySelector('.telefoneSocio').innerHTML = tempSocio.telefone
+            
         }
     });
     
@@ -139,9 +142,9 @@ function preencheTabela(tempSocio) {
 function abreCardSocio(idSocio) {
     $('#cardAddsocio').show();
     $('#campos-socio').hide();
-    socioSel = pageSocio.socios[idSocio]
-    console.log(idSocio);
-    if (socioSel) {
+    if (idSocio) {
+        
+        socioSel = pageSocio.socios[idSocio]
         pageSocio.idSocioField.value = socioSel.uid;
         pageSocio.nomeField.value = socioSel.nome;
         pageSocio.cpfField.value = socioSel.cpf;

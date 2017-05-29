@@ -71,7 +71,7 @@ pageDash.birthDate.addEventListener('click', function () {
 })
 
 $(document).ready(function () {
-    $('#table-socio').DataTable();
+    //$('#table-socio').DataTable();
 });
 
 pageDash.btnUsuario.addEventListener('click', function () {
