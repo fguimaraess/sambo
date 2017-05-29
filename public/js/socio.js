@@ -105,6 +105,16 @@ function preencheTabela(tempSocio) {
 
 function abreCardSocio(idSocio) {
     console.log(idSocio)
+    $('#cardAddsocio').show();
+    $('#campos-socio').hide();
+    socioSel = pageSocio.socios[idSocio]
+    console.log(socioSel)
+    pageSocio.nomeField.value = socioSel.nome;
+    pageSocio.cpfField.value = socioSel.cpf;
+    pageSocio.emailField.value = socioSel.email;
+    pageSocio.telefoneField.value = socioSel.telefone;
+    pageSocio.dataNascimentoField.value = socioSel.datanascimento;
+        
 }
 
 function excluirSocio(idSocio) {
@@ -117,3 +127,4 @@ function limparTabela() {
         pageSocio.tabelaSocio.querySelector('#body-socio').innerHTML = '';
     });
 }
+
