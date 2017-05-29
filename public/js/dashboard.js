@@ -71,5 +71,24 @@ pageDash.birthDate.addEventListener('click', function () {
 })
 
 $(document).ready(function () {
-    //$('#table-socio').DataTable();
+    $('#table-socio').DataTable();
+});
+
+pageDash.btnUsuario.addEventListener('click', function () {
+    swal({
+        title: "Logout",
+        type: "warning",
+        text: "Deseja sair do Sambô?",
+        showCancelButton: true,
+        cancelButtonText: "Cancelar",
+        showConfirmButton: true,
+        confirmButtonText: "Sim",
+        closeOnConfirm: false
+    }, function () {
+        firebase.auth().signOut().then(function () {
+             window.location = "/index.html";
+        }, function (error) {
+            alert(error);
+        });
+    });
 });
