@@ -1,5 +1,6 @@
 var pageSocio = {
     socios: [],
+    idSocioField: document.querySelector('#id-field'),
     nomeField: document.querySelector('#nomesocio-field'),
     cpfField: document.querySelector('#cpf-field'),
     emailField: document.querySelector('#email-field'),
@@ -56,8 +57,14 @@ pageSocio.btnSalvar.addEventListener('click', function () {
         datanascimento: pageSocio.dataNascimentoField.value
     };
 
-
-    novoSocio(tempSocio);
+    if(pageSocio.idSocioField.value)
+    {
+        salvaAlteracoes(tempSocio);
+        console.log("O ID É ESSE AQUI: " + pageSocio.idSocioField.value)
+    } else {
+        novoSocio(tempSocio);
+    }
+    
 })
 
 function novoSocio(tempSocio) {
@@ -70,6 +77,21 @@ function novoSocio(tempSocio) {
         $('#campos-socio').show();
         $('#cardAddsocio').hide();
     }
+}
+
+function salvaAlteracoes(tempSocio){
+    socioSel = pageSocio.socios[pageSocio.idSocioField.value];
+    
+    var socioAtt = {
+        nome: tempSocio.nome,
+        cpf: tempSocio.cpf,
+        email: tempSocio.email,
+        telefone: tempSocio.telefone,
+        datanascimento: tempSocio.datanascimento
+    }
+    console.log(socioAtt)
+    //Doc do firebase pra atualizar
+    firebase.database().ref('socios/' + pageSocio.idSocioField.value).update(tempSocio).then(swal("", "cadastro atualizado com sucesso", "success"));
 }
 
 function getSocio() {
@@ -117,12 +139,14 @@ function abreCardSocio(idSocio) {
     socioSel = pageSocio.socios[idSocio]
     console.log(idSocio);
     if (socioSel) {
+        pageSocio.idSocioField.value = socioSel.uid;
         pageSocio.nomeField.value = socioSel.nome;
         pageSocio.cpfField.value = socioSel.cpf;
         pageSocio.emailField.value = socioSel.email;
         pageSocio.telefoneField.value = socioSel.telefone;
         pageSocio.dataNascimentoField.value = socioSel.datanascimento;
     } else {
+        pageSocio.idSocioField.value = "";
         pageSocio.nomeField.value = "";
         pageSocio.cpfField.value = "";
         pageSocio.emailField.value = "";
