@@ -30,10 +30,6 @@ pageDash.btnRelatorio.addEventListener('click', function () {
     $('.socio-div').hide();
 })
 
-pageDash.btnAddsocio.addEventListener('click', function () {
-    $('#campos-socio').hide();
-    $('#cardAddsocio').show();
-})
 
 pageDash.btnAddpgto.addEventListener('click', function () {
     $('#campos-Pgto').hide();

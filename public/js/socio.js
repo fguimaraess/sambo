@@ -39,6 +39,14 @@ pageSocio.btnCancelar.addEventListener('click', function () {
     $('#cardAddsocio').hide();
 });
 
+
+pageDash.btnAddsocio.addEventListener('click', function () {
+    $('#campos-socio').hide();
+    $('#cardAddsocio').show();
+    // não pega o id do editar
+    abreCardSocio(null);
+})
+
 pageSocio.btnSalvar.addEventListener('click', function () {
     var tempSocio = {
         nome: pageSocio.nomeField.value,
@@ -53,7 +61,7 @@ pageSocio.btnSalvar.addEventListener('click', function () {
 })
 
 function novoSocio(tempSocio) {
-    if (tempSocio.nome == "") {
+    if (tempSocio.nome == "" || tempSocio.cpf == "") {
         swal("", "Verifique os campos obrigatórios", "error")
     } else {
         swal("", "Sócio cadastrado com sucessso", "success");
@@ -104,17 +112,23 @@ function preencheTabela(tempSocio) {
 }
 
 function abreCardSocio(idSocio) {
-    console.log(idSocio)
     $('#cardAddsocio').show();
     $('#campos-socio').hide();
     socioSel = pageSocio.socios[idSocio]
-    console.log(socioSel)
-    pageSocio.nomeField.value = socioSel.nome;
-    pageSocio.cpfField.value = socioSel.cpf;
-    pageSocio.emailField.value = socioSel.email;
-    pageSocio.telefoneField.value = socioSel.telefone;
-    pageSocio.dataNascimentoField.value = socioSel.datanascimento;
-        
+    console.log(idSocio);
+    if (socioSel) {
+        pageSocio.nomeField.value = socioSel.nome;
+        pageSocio.cpfField.value = socioSel.cpf;
+        pageSocio.emailField.value = socioSel.email;
+        pageSocio.telefoneField.value = socioSel.telefone;
+        pageSocio.dataNascimentoField.value = socioSel.datanascimento;
+    } else {
+        pageSocio.nomeField.value = "";
+        pageSocio.cpfField.value = "";
+        pageSocio.emailField.value = "";
+        pageSocio.telefoneField.value = "";
+        pageSocio.dataNascimentoField.value = "";
+    }
 }
 
 function excluirSocio(idSocio) {
@@ -127,4 +141,3 @@ function limparTabela() {
         pageSocio.tabelaSocio.querySelector('#body-socio').innerHTML = '';
     });
 }
-
