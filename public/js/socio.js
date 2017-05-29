@@ -57,14 +57,15 @@ pageSocio.btnSalvar.addEventListener('click', function () {
         datanascimento: pageSocio.dataNascimentoField.value
     };
 
-    if(pageSocio.idSocioField.value)
-    {
+    if (pageSocio.idSocioField.value) {
         salvaAlteracoes(tempSocio);
         console.log("O ID É ESSE AQUI: " + pageSocio.idSocioField.value)
     } else {
         novoSocio(tempSocio);
     }
-    
+    $('#campos-socio').show();
+    $('#cardAddsocio').hide();
+
 })
 
 function novoSocio(tempSocio) {
@@ -74,24 +75,26 @@ function novoSocio(tempSocio) {
         swal("", "Sócio cadastrado com sucessso", "success");
         firebase.database().ref('socios/').push(tempSocio);
         //verificar melhor método de retornar para a div sócios
-        $('#campos-socio').show();
-        $('#cardAddsocio').hide();
+
     }
 }
 
-function salvaAlteracoes(tempSocio){
+function salvaAlteracoes(tempSocio) {
     socioSel = pageSocio.socios[pageSocio.idSocioField.value];
-    
-    var socioAtt = {
-        nome: tempSocio.nome,
-        cpf: tempSocio.cpf,
-        email: tempSocio.email,
-        telefone: tempSocio.telefone,
-        datanascimento: tempSocio.datanascimento
-    }
-    console.log(socioAtt)
     //Doc do firebase pra atualizar
     firebase.database().ref('socios/' + pageSocio.idSocioField.value).update(tempSocio).then(swal("", "cadastro atualizado com sucesso", "success"));
+
+    //Atualiza tela de sócios
+    var sociosNaTela = document.querySelectorAll('.sociosTabela');
+    sociosNaTela.forEach(function (socioHtml){
+        if (socioHtml.id == pageSocio.idSocioField.value){
+            socioHtml.querySelector('.nomeSocio').innerHTML = tempSocio.nome;
+            socioHtml.querySelector('.cpfSocio').innerHTML = tempSocio.cpf;
+            socioHtml.querySelector('.emailSocio').innerHtml = tempSocio.email;
+            socioHtml.querySelector('.telefoneSocio').innerHTML = tempSocio.telefone
+        }
+    });
+    
 }
 
 function getSocio() {
@@ -126,7 +129,7 @@ function preencheTabela(tempSocio) {
     html += '<td class="nomeSocio">' + tempSocio.nome + '</td>';
     html += '<td class="emailSocio">' + tempSocio.email + '</td>';
     html += '<td class="telefoneSocio">' + tempSocio.telefone + '</td>';
-    html += '<td class="dataSocio">' + tempSocio.datanascimento + '</td>';
+    //html += '<td class="dataSocio">' + tempSocio.datanascimento + '</td>';
     html += '<td class="dataSocio">XXX</td>';
     html += '<td><a onclick="abreCardSocio(\'' + tempSocio.uid + '\')" href="#" class="editar-socio"><i class="material-icons">mode_edit</i></a>' + '&nbsp;&nbsp;' + '<a onclick="excluirSocio(\'' + tempSocio.uid + '\' )" href="#" class="excluir-socio"><i class="material-icons"><i class="material-icons">remove_circle</i></td>';
     html += '</tr>'
