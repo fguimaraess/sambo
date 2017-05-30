@@ -26,6 +26,7 @@ window.addEventListener('load', getSocio);
 //busca por nome
 pageSocio.btnBuscaSocio.addEventListener('click', function () {
     getSocioPorNome(pageSocio.buscaSocio.value);
+    console.log(pageSocio.buscaSocio.value);
 });
 
 //Apagar busca
@@ -159,6 +160,7 @@ function abreCardSocio(idSocio) {
         pageSocio.telefoneField.value = "";
         pageSocio.dataNascimentoField.value = "";
     }
+    console.log(pageSocio.dataNascimentoField.value);
 }
 
 function excluirSocio(idSocio) {

@@ -1,5 +1,6 @@
 var pagePgto = {
     pagamentos: [],
+    idPgtofield: document.querySelector('#id-field-Pgto'),
     btnCancelar: document.querySelector('#cancel-card-Pgto'),
     btnSalvar: document.querySelector('#save-card-Pgto'),
     btnAddPgto: document.querySelector('#addPagto'),
@@ -7,23 +8,29 @@ var pagePgto = {
     socioPgtoField: document.querySelector('#sociopgto-field'),
     valorField: document.querySelector('#valor-field'),
     referenteField: document.querySelector('#referente-field'),
-    dataPgtoField: document.querySelector('#datePgto-field')
+    dataPgtoField: document.querySelector('#datePgto-field'),
+    btnBuscaPgto: document.querySelector("#busca-pgto-btn"),
+    btnClearPgto: document.querySelector("#apagar-busca-pgto-btn"),
+    buscaPgto: document.querySelector("#busca-pgto-field"),
+
 }
 
 window.addEventListener('load', getPgto);
+
 
 pagePgto.btnCancelar.addEventListener('click', function () {
     $('#campos-Pgto').show();
     $('#cardAddPgto').hide();
 })
 
-pagePgto.btnAddPgto.addEventListener('click', function(){
+pagePgto.btnAddPgto.addEventListener('click', function () {
     $('#campos-Pgto').hide();
     $('#cardAddPgto').show();
     getSociosCombo();
+    abreCardPgto(null);
 });
 
-pagePgto.salvarPgto.addEventListener('click', function(){
+pagePgto.salvarPgto.addEventListener('click', function () {
     var tempPag = {
         idcliente: pagePgto.socioPgtoField.value,
         valor: pagePgto.valorField.value,
@@ -44,14 +51,14 @@ function novoPagamento(tempPag) {
 }
 
 function getPgto() {
-    
+
     limparTabelaPgto();
     firebase.database().ref('pagamentos/').once('value').then(function (snapshot) {
         snapshot.forEach(function (pgtoRef) {
             var tempPag = pgtoRef.val();
             tempPag.uid = pgtoRef.key;
-            preencheTabelaPgto(tempPag);
             pagePgto.pagamentos[pgtoRef.key] = tempPag;
+            preencheTabelaPgto(tempPag);
         })
     })
 }
@@ -60,7 +67,7 @@ function preencheTabelaPgto(tempPag) {
     socioSel = pageSocio.socios[tempPag.idcliente]
     var html = '';
     html += '<tr class="pgtosTabela" id="' + tempPag.uid + '">';
-    html += '<td class="nomeCliente">' + socioSel.nome + " - " + socioSel.cpf + '</td>';
+    html += '<td class="nomeClientePgto">' + socioSel.nome + " - " + socioSel.cpf + '</td>';
     html += '<td class="valorPgto">' + "R$" + tempPag.valor + '</td>';
     html += '<td class="mesPgto">' + tempPag.mesreferente + '</td>';
     html += '<td class="dataPgto">' + tempPag.datapagamento + '</td>';
@@ -81,11 +88,11 @@ function limparTabelaPgto() {
     });
 }
 
-function getSociosCombo(){
+function getSociosCombo() {
     $(pagePgto.socioPgtoField).empty();
     var tempSocio = [];
     tempSocio = pageSocio.socios;
-    for(var key in tempSocio){
+    for (var key in tempSocio) {
         preencheCombo(tempSocio[key]);
     }
 }
@@ -96,4 +103,30 @@ function preencheCombo(tempSocio) {
     newOption.innerHTML = tempSocio.nome + " - " + tempSocio.cpf;
     pagePgto.socioPgtoField.options.add(newOption);
     $(pagePgto.socioPgtoField).material_select();
+}
+
+function abreCardPgto(idPgto) {
+    $('#cardAddPgto').show();
+    $('#campos-Pgto').hide();
+    if (idPgto) {
+        pgtoSel = pagePgto.pagamentos[idPgto]
+        socioSele = pageSocio.socios[pgtoSel.idcliente]
+        console.log(socioSele)
+        pagePgto.idPgtofield.value = pgtoSel.uid;
+        pagePgto.valorField.value = pgtoSel.valor;
+        pagePgto.referenteField.value = pgtoSel.mesreferente;
+        pagePgto.dataPgtoField.value = pgtoSel.datapagamento;
+        $(pagePgto.socioPgtoField).empty();
+        var newOption = document.createElement('option');
+        newOption.value = socioSele.uid;
+        newOption.innerHTML = socioSele.nome;
+        pagePgto.socioPgtoField.options.add(newOption);
+        $(pagePgto.socioPgtoField).material_select();
+    }else {
+        pagePgto.idPgtofield.value = "";
+        pagePgto.valorField.value = "";
+        pagePgto.referenteField.value = "";
+        pagePgto.dataPgtoField.value = "";
+    }
+    
 }
