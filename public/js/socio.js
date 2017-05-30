@@ -163,6 +163,7 @@ function abreCardSocio(idSocio) {
 
 function excluirSocio(idSocio) {
     firebase.database().ref('socios/' + idSocio).remove();
+    swal("", "Sócio excluido", "success");
 }
 
 function limparTabela() {
