@@ -3,12 +3,14 @@ var pageDash = {
     btnSocio: document.querySelector("#socios-dashboard"),
     btnPgto: document.querySelector("#pagamentos-dashboard"),
     btnRelatorio: document.querySelector("#relatorios-dashboard"),
-    btnAddsocio: document.querySelector("#addSocio"),
     logoSambo: document.querySelector("#logo-sambo"),
-    birthDate: document.querySelector("#datanascimento-field"),
-    btnAddpgto: document.querySelector("#addPagto")
+    birthDate: document.querySelector("#datanascimento-field")
 }
 
+window.addEventListener('load', function () {
+    getSocio();
+    getPagamentosSocios();
+});
 /*window.addEventListener('load', function () {
         var user = firebase.auth().currentUser;
         firebase.auth().onAuthStateChanged(function (user) {
@@ -42,10 +44,6 @@ pageDash.btnRelatorio.addEventListener('click', function () {
 })
 
 
-pageDash.btnAddpgto.addEventListener('click', function () {
-    $('#campos-Pgto').hide();
-    $('#cardAddPgto').show();
-})
 
 pageDash.logoSambo.addEventListener('click', function () {
     window.location = "/dashboard.html";

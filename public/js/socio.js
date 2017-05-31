@@ -14,23 +14,22 @@ var pageSocio = {
     buscaSocio: document.querySelector('#busca-socio-field'),
     btnBuscaSocio: document.querySelector('#busca-socio-btn'),
     btnClearSocio: document.querySelector('#apagar-busca-socio-btn'),
-    tabelaSocio: document.querySelector('#table-socio')
+    tabelaSocio: document.querySelector('#table-socio'),
+    btnAddsocio: document.querySelector("#addSocio"),
 
 }
 window.addEventListener('load', function () {
-    getSocio();
     getPagamentosSocios();
 });
 
-//pageSocio.btnSocioMenu.addEventListener('click', function(){
-//faz isso
-//getSocio();
-//})
+pageSocio.btnSocioMenu.addEventListener('click', function () {
+    getSocio();
+    getPagamentosSocios();
+})
 
 //busca por nome
 pageSocio.btnBuscaSocio.addEventListener('click', function () {
     getSocioPorNome(pageSocio.buscaSocio.value);
-    //console.log(pageSocio.buscaSocio.value);
 });
 
 //Apagar busca
@@ -46,7 +45,7 @@ pageSocio.btnCancelar.addEventListener('click', function () {
 });
 
 
-pageDash.btnAddsocio.addEventListener('click', function () {
+pageSocio.btnAddsocio.addEventListener('click', function () {
     $('#campos-socio').hide();
     $('#cardAddsocio').show();
     // não pega o id do editar
@@ -110,7 +109,7 @@ function getPagamentosSocios() {
             var tempPag = pgtoRef.val();
             tempPag.uid = pgtoRef.key;
             pageSocio.pagamentos[pgtoRef.key] = tempPag;
-            })
+        })
     })
 }
 
@@ -120,14 +119,15 @@ function getSocio() {
         snapshot.forEach(function (socioRef) {
             var tempSocio = socioRef.val();
             tempSocio.uid = socioRef.key;
+
+            var tempPagamentos = pageSocio.pagamentos;
+            for (var key in tempPagamentos) {
+                if (tempPagamentos[key].idcliente == tempSocio.uid) {
+                    tempSocio.ultpgto = tempPagamentos[key].datapagamento;
+                }
             pageSocio.socios[socioRef.key] = tempSocio;
-            preencheTabela(tempSocio);
-            
-            //DESCOBRIR PQ NAO TA FUNCIONANDO O MAP
-            for(var keyy in pageSocio.pagamentos)
-            {
-                console.log(pageSocio.pagamentos[keyy])
             }
+            preencheTabela(tempSocio);
         })
     })
 

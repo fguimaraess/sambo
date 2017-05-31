@@ -1,5 +1,6 @@
 var pagePgto = {
     pagamentos: [],
+    menuPagamentos: document.querySelector('#pagamentos-dashboard'),
     idPgtofield: document.querySelector('#id-field-Pgto'),
     btnCancelar: document.querySelector('#cancel-card-Pgto'),
     btnSalvar: document.querySelector('#save-card-Pgto'),
@@ -12,12 +13,13 @@ var pagePgto = {
     btnBuscaPgto: document.querySelector("#busca-pgto-btn"),
     btnClearPgto: document.querySelector("#apagar-busca-pgto-btn"),
     buscaPgto: document.querySelector("#busca-pgto-field"),
-    tabelaPgto: document.querySelector('#table-pgto')
 
 }
 
-window.addEventListener('load', getPgto);
-
+window.addEventListener('load', getSocio);
+pagePgto.menuPagamentos.addEventListener('click', function(){
+    getPgto();
+})
 
 pagePgto.btnCancelar.addEventListener('click', function () {
     $('#campos-Pgto').show();
@@ -75,14 +77,19 @@ function salvaAltPag(tempPag) {
 
 function getPgto() {
     limparTabelaPgto();
-    firebase.database().ref('pagamentos/').once('value').then(function (snapshot) {
+    /*firebase.database().ref('pagamentos/').once('value').then(function (snapshot) {
         snapshot.forEach(function (pgtoRef) {
             var tempPag = pgtoRef.val();
             tempPag.uid = pgtoRef.key;
             pagePgto.pagamentos[pgtoRef.key] = tempPag;
             preencheTabelaPgto(tempPag);
         })
-    })
+    })*/
+    var pagamentos = pageSocio.pagamentos;
+    //console.log(pageSocio.pagamentos)
+    for(var key in pagamentos){
+        preencheTabelaPgto(pagamentos[key]);
+    }
 }
 
 function preencheTabelaPgto(tempPag) {
