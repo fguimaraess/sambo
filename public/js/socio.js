@@ -1,5 +1,6 @@
 var pageSocio = {
     socios: [],
+    pagamentos: [],
     idSocioField: document.querySelector('#id-field'),
     nomeField: document.querySelector('#nomesocio-field'),
     cpfField: document.querySelector('#cpf-field'),
@@ -16,7 +17,10 @@ var pageSocio = {
     tabelaSocio: document.querySelector('#table-socio')
 
 }
-window.addEventListener('load', getSocio);
+window.addEventListener('load', function () {
+    //getSocio();
+    getSocioComPgto();
+});
 
 //pageSocio.btnSocioMenu.addEventListener('click', function(){
 //faz isso
@@ -89,29 +93,66 @@ function salvaAlteracoes(tempSocio) {
     pageSocio.socios[idSocio] = tempSocio;
     //Atualiza tela de sócios
     var sociosNaTela = document.querySelectorAll('.sociosTabela');
-    sociosNaTela.forEach(function (socioHtml){
-        if (socioHtml.id == idSocio){
+    sociosNaTela.forEach(function (socioHtml) {
+        if (socioHtml.id == idSocio) {
             socioHtml.querySelector('.nomeSocio').innerHTML = tempSocio.nome;
             socioHtml.querySelector('.cpfSocio').innerHTML = tempSocio.cpf;
             socioHtml.querySelector('.emailSocio').innerHtml = tempSocio.email;
             socioHtml.querySelector('.telefoneSocio').innerHTML = tempSocio.telefone
-            
+
         }
     });
-    
+
 }
 
-function getSocio() {
+/*function getSocio() {
     limparTabela();
     firebase.database().ref('socios/').once('value').then(function (snapshot) {
         snapshot.forEach(function (socioRef) {
             var tempSocio = socioRef.val();
             tempSocio.uid = socioRef.key;
-            preencheTabela(tempSocio);
+            //preencheTabela(tempSocio);
             pageSocio.socios[socioRef.key] = tempSocio;
         })
     })
+}*/
+
+function getSocioComPgto() {
+    limparTabela();
+    firebase.database().ref('socios/').once('value').then(function (snapshot) {
+        snapshot.forEach(function (socioRef) {
+            var tempSocio = socioRef.val();
+            tempSocio.uid = socioRef.key;
+            pageSocio.socios[socioRef.key] = tempSocio;
+            firebase.database().ref('pagamentos/').once('value').then(function (snapshot) {
+                snapshot.forEach(function (pgtoRef) {
+                    var tempPag = pgtoRef.val();
+                    if (tempSocio.uid == tempPag.idcliente) {
+                        for (var key in tempPag) {
+                            var dataAux = ("01/01/1900").split("/");
+                            var dataAuxFormat = new Date(dataAux[2], dataAux[1] - 1, dataAux[0]);
+                            var dataUltPgto = tempPag.datapagamento.split("/");
+                            var dataUltPgtoFormat = new Date(dataUltPgto[2], dataUltPgto[1] - 1, dataUltPgto[0]);
+                            console.log(dataUltPgtoFormat)
+                            if (dataUltPgtoFormat > dataAuxFormat) {
+                                dataAuxFormat = dataUltPgtoFormat;
+                                
+                            }
+                            pageSocio.socios[tempPag.idcliente].ultpgto = dataUltPgtoFormat;
+                        }
+
+
+
+                    }
+                })
+                preencheTabela(tempSocio);
+            })
+
+        })
+
+    })
 }
+
 
 function getSocioPorNome(nomeSocio) {
     limparTabela();
@@ -126,6 +167,7 @@ function getSocioPorNome(nomeSocio) {
     }
 }
 
+
 function preencheTabela(tempSocio) {
     var html = '';
     html += '<tr class="sociosTabela" id="' + tempSocio.uid + '">';
@@ -134,7 +176,7 @@ function preencheTabela(tempSocio) {
     html += '<td class="emailSocio">' + tempSocio.email + '</td>';
     html += '<td class="telefoneSocio">' + tempSocio.telefone + '</td>';
     //html += '<td class="dataSocio">' + tempSocio.datanascimento + '</td>';
-    html += '<td class="dataSocio">XXX</td>';
+    html += '<td class="ultPgto">' + tempSocio.ultpgto + '</td>';
     html += '<td><a onclick="abreCardSocio(\'' + tempSocio.uid + '\')" href="#" class="editar-socio"><i class="material-icons">mode_edit</i></a>' + '&nbsp;&nbsp;' + '<a onclick="excluirSocio(\'' + tempSocio.uid + '\' )" href="#" class="excluir-socio"><i class="material-icons"><i class="material-icons">remove_circle</i></td>';
     html += '</tr>'
     $('#body-socio').append(html);
@@ -144,7 +186,7 @@ function abreCardSocio(idSocio) {
     $('#cardAddsocio').show();
     $('#campos-socio').hide();
     if (idSocio) {
-        
+
         socioSel = pageSocio.socios[idSocio]
         pageSocio.idSocioField.value = socioSel.uid;
         pageSocio.nomeField.value = socioSel.nome;

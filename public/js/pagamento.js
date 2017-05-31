@@ -37,6 +37,7 @@ pagePgto.salvarPgto.addEventListener('click', function () {
         mesreferente: pagePgto.referenteField.value,
         datapagamento: pagePgto.dataPgtoField.value,
     };
+    
     novoPagamento(tempPag)
 });
 
@@ -51,7 +52,6 @@ function novoPagamento(tempPag) {
 }
 
 function getPgto() {
-
     limparTabelaPgto();
     firebase.database().ref('pagamentos/').once('value').then(function (snapshot) {
         snapshot.forEach(function (pgtoRef) {
