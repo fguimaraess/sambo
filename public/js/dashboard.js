@@ -8,6 +8,17 @@ var pageDash = {
     birthDate: document.querySelector("#datanascimento-field"),
     btnAddpgto: document.querySelector("#addPagto")
 }
+
+/*window.addEventListener('load', function () {
+        var user = firebase.auth().currentUser;
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                window.location = "/dashboard.html";
+            }else {
+                window.location = "/index.html"
+            }
+        });
+}*/
 pageDash.btnSocio.addEventListener('click', function () {
     $('.socio-div').show();
     $('#campos-socio').show();
