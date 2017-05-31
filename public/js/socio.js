@@ -30,7 +30,7 @@ window.addEventListener('load', function () {
 //busca por nome
 pageSocio.btnBuscaSocio.addEventListener('click', function () {
     getSocioPorNome(pageSocio.buscaSocio.value);
-    console.log(pageSocio.buscaSocio.value);
+    //console.log(pageSocio.buscaSocio.value);
 });
 
 //Apagar busca
@@ -64,7 +64,7 @@ pageSocio.btnSalvar.addEventListener('click', function () {
 
     if (pageSocio.idSocioField.value) {
         salvaAlteracoes(tempSocio);
-        console.log(tempSocio)
+        //console.log(tempSocio)
     } else {
         novoSocio(tempSocio);
     }
@@ -89,7 +89,7 @@ function salvaAlteracoes(tempSocio) {
     //socioSel = pageSocio.socios[pageSocio.idSocioField.value];
     //Doc do firebase pra atualizar
     firebase.database().ref('socios/' + idSocio).update(tempSocio).then(swal("", "cadastro atualizado com sucesso", "success"));
-    console.log(tempSocio)
+    //console.log(tempSocio)
     pageSocio.socios[idSocio] = tempSocio;
     //Atualiza tela de sócios
     var sociosNaTela = document.querySelectorAll('.sociosTabela');
@@ -133,7 +133,7 @@ function getSocioComPgto() {
                             var dataAuxFormat = new Date(dataAux[2], dataAux[1] - 1, dataAux[0]);
                             var dataUltPgto = tempPag.datapagamento.split("/");
                             var dataUltPgtoFormat = new Date(dataUltPgto[2], dataUltPgto[1] - 1, dataUltPgto[0]);
-                            console.log(dataUltPgtoFormat)
+                            //console.log(dataUltPgtoFormat)
                             if (dataUltPgtoFormat > dataAuxFormat) {
                                 dataAuxFormat = dataUltPgtoFormat;
                                 
@@ -202,7 +202,7 @@ function abreCardSocio(idSocio) {
         pageSocio.telefoneField.value = "";
         pageSocio.dataNascimentoField.value = "";
     }
-    console.log(pageSocio.dataNascimentoField.value);
+   // console.log(pageSocio.dataNascimentoField.value);
 }
 
 function excluirSocio(idSocio) {

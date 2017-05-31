@@ -12,6 +12,7 @@ var pagePgto = {
     btnBuscaPgto: document.querySelector("#busca-pgto-btn"),
     btnClearPgto: document.querySelector("#apagar-busca-pgto-btn"),
     buscaPgto: document.querySelector("#busca-pgto-field"),
+    tabelaPgto: document.querySelector('#table-pgto')
 
 }
 
@@ -37,8 +38,13 @@ pagePgto.salvarPgto.addEventListener('click', function () {
         mesreferente: pagePgto.referenteField.value,
         datapagamento: pagePgto.dataPgtoField.value,
     };
-    
-    novoPagamento(tempPag)
+    if (pagePgto.idPgtofield.value) {
+        salvaAltPag(tempPag);
+    } else {
+        novoPagamento(tempPag);
+    }
+    $('#campos-Pgto').show();
+    $('#cardAddPgto').hide();
 });
 
 
@@ -49,6 +55,22 @@ function novoPagamento(tempPag) {
         swal("", "Pagamento cadastrado com sucessso", "success");
         firebase.database().ref('pagamentos/').push(tempPag);
     }
+}
+
+function salvaAltPag(tempPag) {
+    idPgto = pagePgto.idPgtofield.value;
+    firebase.database().ref('pagamentos/' + idPgto).update(tempPag).then(swal("", "Pagamento atualizado com sucesso", "success"));
+    console.log(tempPag);
+    pagePgto.pagamentos[idPgto] = tempPag;
+    var pagNaTela = document.querySelectorAll('.pgtosTabela');
+    pagNaTela.forEach(function (pagtoHtml) {
+        if (pagtoHtml.id == idPgto) {
+            //pagtoHtml.querySelector('.nomeClientePgto').innerHTML = tempPag.nome;
+            pagtoHtml.querySelector('.valorPgto').innerHTML = tempPag.valor;
+            pagtoHtml.querySelector('.mesPgto').innerHTML = tempPag.mesreferente;
+            pagtoHtml.querySelector('.dataPgto').innerHTML = tempPag.datapagamento;
+        }
+    });
 }
 
 function getPgto() {
@@ -81,10 +103,11 @@ function excluirPgto(idPgto) {
     swal("", "Pagamento excluído", "success");
 }
 
+//verificar isso
 function limparTabelaPgto() {
     var pgtosNaTela = document.querySelectorAll('.pgtosTabela');
     pgtosNaTela.forEach(function () {
-        pageSocio.tabelaSocio.querySelector('#body-pgto').innerHTML = '';
+        pageSocio.tabelaPgto.querySelector('#body-pgto').innerHTML = '';
     });
 }
 
@@ -111,7 +134,7 @@ function abreCardPgto(idPgto) {
     if (idPgto) {
         pgtoSel = pagePgto.pagamentos[idPgto]
         socioSele = pageSocio.socios[pgtoSel.idcliente]
-        console.log(socioSele)
+        //console.log(socioSele)
         pagePgto.idPgtofield.value = pgtoSel.uid;
         pagePgto.valorField.value = pgtoSel.valor;
         pagePgto.referenteField.value = pgtoSel.mesreferente;
@@ -122,11 +145,11 @@ function abreCardPgto(idPgto) {
         newOption.innerHTML = socioSele.nome;
         pagePgto.socioPgtoField.options.add(newOption);
         $(pagePgto.socioPgtoField).material_select();
-    }else {
+    } else {
         pagePgto.idPgtofield.value = "";
         pagePgto.valorField.value = "";
         pagePgto.referenteField.value = "";
         pagePgto.dataPgtoField.value = "";
     }
-    
+
 }
