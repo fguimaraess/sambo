@@ -78,6 +78,7 @@ function novoSocio(tempSocio) {
     } else {
         swal("", "Sócio cadastrado com sucessso", "success");
         firebase.database().ref('socios/').push(tempSocio);
+        getSocio();
         //verificar melhor método de retornar para a div sócios
 
     }
@@ -189,8 +190,13 @@ function abreCardSocio(idSocio) {
 }
 
 function excluirSocio(idSocio) {
+    /*if (idSocio == tempPag.idcliente){
+        swal("erro", "Sócio possui Pagamentos", "error");
+    }else{*/
     firebase.database().ref('socios/' + idSocio).remove();
     swal("", "Sócio excluido", "success");
+    console.log(idSocio);
+
 }
 
 function limparTabela() {
