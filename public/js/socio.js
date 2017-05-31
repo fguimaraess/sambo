@@ -119,10 +119,11 @@ function getSocio() {
         snapshot.forEach(function (socioRef) {
             var tempSocio = socioRef.val();
             tempSocio.uid = socioRef.key;
-
             var tempPagamentos = pageSocio.pagamentos;
+            tempSocio.ultpgto = "";
             for (var key in tempPagamentos) {
                 if (tempPagamentos[key].idcliente == tempSocio.uid) {
+                    if(tempPagamentos[key].datapagamento > tempSocio.ultpgto)
                     tempSocio.ultpgto = tempPagamentos[key].datapagamento;
                 }
             pageSocio.socios[socioRef.key] = tempSocio;
