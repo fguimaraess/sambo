@@ -18,8 +18,8 @@ var pageSocio = {
 
 }
 window.addEventListener('load', function () {
-    //getSocio();
-    getSocioComPgto();
+    getSocio();
+    //getPagamentosSocios();
 });
 
 //pageSocio.btnSocioMenu.addEventListener('click', function(){
@@ -99,59 +99,37 @@ function salvaAlteracoes(tempSocio) {
             socioHtml.querySelector('.cpfSocio').innerHTML = tempSocio.cpf;
             socioHtml.querySelector('.emailSocio').innerHtml = tempSocio.email;
             socioHtml.querySelector('.telefoneSocio').innerHTML = tempSocio.telefone
-
         }
     });
 
 }
 
-/*function getSocio() {
-    limparTabela();
-    firebase.database().ref('socios/').once('value').then(function (snapshot) {
-        snapshot.forEach(function (socioRef) {
-            var tempSocio = socioRef.val();
-            tempSocio.uid = socioRef.key;
-            //preencheTabela(tempSocio);
-            pageSocio.socios[socioRef.key] = tempSocio;
+function getPagamentosSocios(){
+    firebase.database().ref('pagamentos/').once('value').then(function (snapshot) {
+        snapshot.forEach(function (pgtoRef) {
+            var tempPag = pgtoRef.val();
+            tempPag.uid = pgtoRef.key;
+            pageSocio.socios[tempPag.idcliente].ultimopagamento = tempPag.datapagamento;            
+            //preenchePgto(pageSocio.socios[tempPag.idcliente]);
+            //console.log(pageSocio.socios[tempPag.idcliente])
         })
-    })
-}*/
-
-function getSocioComPgto() {
-    limparTabela();
-    firebase.database().ref('socios/').once('value').then(function (snapshot) {
-        snapshot.forEach(function (socioRef) {
-            var tempSocio = socioRef.val();
-            tempSocio.uid = socioRef.key;
-            pageSocio.socios[socioRef.key] = tempSocio;
-            firebase.database().ref('pagamentos/').once('value').then(function (snapshot) {
-                snapshot.forEach(function (pgtoRef) {
-                    var tempPag = pgtoRef.val();
-                    if (tempSocio.uid == tempPag.idcliente) {
-                        for (var key in tempPag) {
-                            var dataAux = ("01/01/1900").split("/");
-                            var dataAuxFormat = new Date(dataAux[2], dataAux[1] - 1, dataAux[0]);
-                            var dataUltPgto = tempPag.datapagamento.split("/");
-                            var dataUltPgtoFormat = new Date(dataUltPgto[2], dataUltPgto[1] - 1, dataUltPgto[0]);
-                            //console.log(dataUltPgtoFormat)
-                            if (dataUltPgtoFormat > dataAuxFormat) {
-                                dataAuxFormat = dataUltPgtoFormat;
-                                
-                            }
-                            pageSocio.socios[tempPag.idcliente].ultpgto = dataUltPgtoFormat;
-                        }
-
-
-
-                    }
-                })
-                preencheTabela(tempSocio);
-            })
-
-        })
-
     })
 }
+
+function getSocio() {
+    limparTabela();
+    
+    firebase.database().ref('socios/').once('value').then(function (snapshot) {
+        snapshot.forEach(function (socioRef) {
+            var tempSocio = socioRef.val();
+            tempSocio.uid = socioRef.key;
+            getPagamentosSocios(tempSocio);
+            pageSocio.socios[socioRef.key] = tempSocio;
+            preencheTabela(tempSocio);
+        })
+    })
+}
+
 
 
 function getSocioPorNome(nomeSocio) {
@@ -169,6 +147,7 @@ function getSocioPorNome(nomeSocio) {
 
 
 function preencheTabela(tempSocio) {
+    console.log(tempSocio)
     var html = '';
     html += '<tr class="sociosTabela" id="' + tempSocio.uid + '">';
     html += '<td class="cpfSocio">' + tempSocio.cpf + '</td>';
@@ -176,7 +155,7 @@ function preencheTabela(tempSocio) {
     html += '<td class="emailSocio">' + tempSocio.email + '</td>';
     html += '<td class="telefoneSocio">' + tempSocio.telefone + '</td>';
     //html += '<td class="dataSocio">' + tempSocio.datanascimento + '</td>';
-    html += '<td class="ultPgto">' + tempSocio.ultpgto + '</td>';
+    html += '<td class="ultPgto">' + tempSocio.ultimopagamento + '</td>';
     html += '<td><a onclick="abreCardSocio(\'' + tempSocio.uid + '\')" href="#" class="editar-socio"><i class="material-icons">mode_edit</i></a>' + '&nbsp;&nbsp;' + '<a onclick="excluirSocio(\'' + tempSocio.uid + '\' )" href="#" class="excluir-socio"><i class="material-icons"><i class="material-icons">remove_circle</i></td>';
     html += '</tr>'
     $('#body-socio').append(html);
