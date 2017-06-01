@@ -25,11 +25,12 @@ window.addEventListener('load', function () {
 pageSocio.btnSocioMenu.addEventListener('click', function () {
     getSocio();
     getPagamentosSocios();
+    pageSocio.buscaSocio.value = null;
 })
 
 //busca por nome
 pageSocio.btnBuscaSocio.addEventListener('click', function () {
-        getSocioPorNome(pageSocio.buscaSocio.value);
+    getSocioPorNome(pageSocio.buscaSocio.value);
 });
 
 //Apagar busca
@@ -63,7 +64,6 @@ pageSocio.btnSalvar.addEventListener('click', function () {
 
     if (pageSocio.idSocioField.value) {
         salvaAlteracoes(tempSocio);
-        //console.log(tempSocio)
     } else {
         novoSocio(tempSocio);
     }
@@ -89,7 +89,6 @@ function salvaAlteracoes(tempSocio) {
     //socioSel = pageSocio.socios[pageSocio.idSocioField.value];
     //Doc do firebase pra atualizar
     firebase.database().ref('socios/' + idSocio).update(tempSocio).then(swal("", "cadastro atualizado com sucesso", "success"));
-    //console.log(tempSocio)
     pageSocio.socios[idSocio] = tempSocio;
     //Atualiza tela de sócios
     var sociosNaTela = document.querySelectorAll('.sociosTabela');
@@ -190,7 +189,6 @@ function abreCardSocio(idSocio) {
 function excluirSocio(idSocio) {
     var pagamentosAtuais = pageSocio.pagamentos;
     var exclui = true;
-    console.log(pagamentosAtuais)
     for (var i in pagamentosAtuais) {
         if (idSocio == pagamentosAtuais[i].idcliente) {
             exclui = false;
@@ -199,9 +197,13 @@ function excluirSocio(idSocio) {
         }
     }
     if (exclui) {
+        //exclui valor do array socios
+        delete pageSocio.socios[idSocio];
+       //excluir o elemento HTML sócio
+        var tempSocio = pageSocio.bodySocio.querySelector('#' + idSocio)
         firebase.database().ref('socios/' + idSocio).remove();
         swal("", "Sócio excluido", "success");
-        getSocio();
+        pageSocio.bodySocio.removeChild(tempSocio);
     }
 }
 
