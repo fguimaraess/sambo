@@ -1,7 +1,7 @@
 var pagePgto = {
     pagamentos: [],
     menuPagamentos: document.querySelector('#pagamentos-dashboard'),
-    idPgtofield: document.querySelector('#id-field-Pgto'),
+    idPgtoField: document.querySelector('#id-field-Pgto'),
     btnCancelar: document.querySelector('#cancel-card-Pgto'),
     btnSalvar: document.querySelector('#save-card-Pgto'),
     btnAddPgto: document.querySelector('#addPagto'),
@@ -18,6 +18,7 @@ var pagePgto = {
 
 window.addEventListener('load', getSocio);
 pagePgto.menuPagamentos.addEventListener('click', function () {
+    getSocio();
     getPgto();
     getSociosCombo();
 })
@@ -36,12 +37,13 @@ pagePgto.btnAddPgto.addEventListener('click', function () {
 
 pagePgto.salvarPgto.addEventListener('click', function () {
     var tempPag = {
+        uid: pagePgto.idPgtoField.value,
         idcliente: pagePgto.socioPgtoField.value,
         valor: pagePgto.valorField.value,
         mesreferente: pagePgto.referenteField.value,
         datapagamento: pagePgto.dataPgtoField.value,
     };
-    if (pagePgto.idPgtofield.value) {
+    if (pagePgto.idPgtoField.value) {
         salvaAltPag(tempPag);
     } else {
         novoPagamento(tempPag);
@@ -63,9 +65,9 @@ function novoPagamento(tempPag) {
 }
 
 function salvaAltPag(tempPag) {
-    idPgto = pagePgto.idPgtofield.value;
+    idPgto = pagePgto.idPgtoField.value;
     firebase.database().ref('pagamentos/' + idPgto).update(tempPag).then(swal("", "Pagamento atualizado com sucesso", "success"));
-    //console.log(pagePgto.idPgtofield.value);
+    //console.log(pagePgto.idPgtoField.value);
     pagePgto.pagamentos[idPgto] = tempPag;
     var pagNaTela = document.querySelectorAll('.pgtosTabela');
     pagNaTela.forEach(function (pagtoHtml) {
@@ -100,6 +102,7 @@ function getPgto() {
 
 function preencheTabelaPgto(tempPag) {
     socioSel = pageSocio.socios[tempPag.idcliente]
+    console.log(tempPag.uid)
     var html = '';
     html += '<tr class="pgtosTabela" id="' + tempPag.uid + '">';
     html += '<td class="nomeClientePgto">' + socioSel.nome + " - " + socioSel.cpf + '</td>';
@@ -142,12 +145,15 @@ function preencheCombo(tempSocio) {
 }
 
 function abreCardPgto(idPgto) {
+    pagePgto.idPgtoField.value = idPgto;
     $('#cardAddPgto').show();
     $('#campos-Pgto').hide();
     if (idPgto) {
         pgtoSel = pagePgto.pagamentos[idPgto]
+        console.log(pgtoSel)
         socioSele = pageSocio.socios[pgtoSel.idcliente]
-        pagePgto.idPgtofield.value = pgtoSel.uid;
+        console.log(socioSele)
+        pagePgto.idPgtoField.value = pgtoSel.uid;
         pagePgto.valorField.value = pgtoSel.valor;
         pagePgto.referenteField.value = pgtoSel.mesreferente;
         pagePgto.dataPgtoField.value = pgtoSel.datapagamento;
@@ -158,7 +164,7 @@ function abreCardPgto(idPgto) {
         pagePgto.socioPgtoField.options.add(newOption);
         $(pagePgto.socioPgtoField).material_select();
     } else {
-        pagePgto.idPgtofield.value = "";
+        pagePgto.idPgtoField.value = "";
         pagePgto.valorField.value = "";
         pagePgto.referenteField.value = "";
         pagePgto.dataPgtoField.value = "";

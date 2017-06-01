@@ -24,7 +24,7 @@ window.addEventListener('load', function () {
 
 pageSocio.btnSocioMenu.addEventListener('click', function () {
     getSocio();
-    getPagamentosSocios();
+    //getPagamentosSocios();
     pageSocio.buscaSocio.value = null;
 })
 
@@ -91,7 +91,8 @@ function salvaAlteracoes(tempSocio) {
         nome: pageSocio.nomeField.value,
         cpf: pageSocio.cpfField.value,
         email: pageSocio.emailField.value,
-        telefone: pageSocio.telefoneField.value
+        telefone: pageSocio.telefoneField.value,
+        datanascimento: pageSocio.dataNascimentoField.value
     }
     //Doc do firebase pra atualizar
     firebase.database().ref('socios/' + idSocio).update(tempSocio).then(swal("", "cadastro atualizado com sucesso", "success"));
@@ -100,14 +101,13 @@ function salvaAlteracoes(tempSocio) {
     var sociosNaTela = document.querySelectorAll('.sociosTabela');
     sociosNaTela.forEach(function (socioHtml) {
         if (socioHtml.id == idSocio) {
+            socioHtml.id.innerHTML = pageSocio.idSocioField.value;
             socioHtml.querySelector('.nomeSocio').innerHTML = tempSocio.nome;
             socioHtml.querySelector('.cpfSocio').innerHTML = tempSocio.cpf;
             socioHtml.querySelector('.emailSocio').innerHTML = tempSocio.email;
             socioHtml.querySelector('.telefoneSocio').innerHTML = tempSocio.telefone
         }
     });
-
-    
     
     pageSocio.socios[idSocio] = tempSocio;
     console.log(tempSocio);
@@ -177,23 +177,25 @@ function preencheTabela(tempSocio) {
 }
 
 function abreCardSocio(idSocio) {
+    pageSocio.idSocioField.value = idSocio;
     $('#cardAddsocio').show();
     $('#campos-socio').hide();
     if (idSocio) {
         socioSel = pageSocio.socios[idSocio]
-        pageSocio.idSocioField.value = socioSel.uid;
+        //Nessa linha abaixo, estava "socioSel.uid", e no banco nao é gravado o uid dentro do socio, apenas fora
+        pageSocio.idSocioField.value = idSocio;
         pageSocio.nomeField.value = socioSel.nome;
         pageSocio.cpfField.value = socioSel.cpf;
         pageSocio.emailField.value = socioSel.email;
         pageSocio.telefoneField.value = socioSel.telefone;
         pageSocio.dataNascimentoField.value = socioSel.datanascimento;
     } else {
-        pageSocio.idSocioField.value = "";
-        pageSocio.nomeField.value = "";
-        pageSocio.cpfField.value = "";
-        pageSocio.emailField.value = "";
-        pageSocio.telefoneField.value = "";
-        pageSocio.dataNascimentoField.value = "";
+        pageSocio.idSocioField.value = null;
+        pageSocio.nomeField.value = null;
+        pageSocio.cpfField.value = null;
+        pageSocio.emailField.value = null;
+        pageSocio.telefoneField.value = null;
+        pageSocio.dataNascimentoField.value = null;
     }
 }
 
