@@ -95,6 +95,9 @@ function getPgto() {
     }*/
 }
 
+
+//function getPgtoPorNome(nome)
+
 function preencheTabelaPgto(tempPag) {
     socioSel = pageSocio.socios[tempPag.idcliente]
     var html = '';

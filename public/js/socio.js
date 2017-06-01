@@ -29,7 +29,7 @@ pageSocio.btnSocioMenu.addEventListener('click', function () {
 
 //busca por nome
 pageSocio.btnBuscaSocio.addEventListener('click', function () {
-    getSocioPorNome(pageSocio.buscaSocio.value);
+        getSocioPorNome(pageSocio.buscaSocio.value);
 });
 
 //Apagar busca
@@ -124,10 +124,10 @@ function getSocio() {
             tempSocio.ultpgto = "";
             for (var key in tempPagamentos) {
                 if (tempPagamentos[key].idcliente == tempSocio.uid) {
-                    if(tempPagamentos[key].datapagamento > tempSocio.ultpgto)
-                    tempSocio.ultpgto = tempPagamentos[key].datapagamento;
+                    if (tempPagamentos[key].datapagamento > tempSocio.ultpgto)
+                        tempSocio.ultpgto = tempPagamentos[key].datapagamento;
                 }
-            pageSocio.socios[socioRef.key] = tempSocio;
+                pageSocio.socios[socioRef.key] = tempSocio;
             }
             preencheTabela(tempSocio);
         })
@@ -170,7 +170,6 @@ function abreCardSocio(idSocio) {
     $('#cardAddsocio').show();
     $('#campos-socio').hide();
     if (idSocio) {
-
         socioSel = pageSocio.socios[idSocio]
         pageSocio.idSocioField.value = socioSel.uid;
         pageSocio.nomeField.value = socioSel.nome;
@@ -186,17 +185,24 @@ function abreCardSocio(idSocio) {
         pageSocio.telefoneField.value = "";
         pageSocio.dataNascimentoField.value = "";
     }
-    // console.log(pageSocio.dataNascimentoField.value);
 }
 
 function excluirSocio(idSocio) {
-    /*if (idSocio == tempPag.idcliente){
-        swal("erro", "Sócio possui Pagamentos", "error");
-    }else{*/
-    firebase.database().ref('socios/' + idSocio).remove();
-    swal("", "Sócio excluido", "success");
-    console.log(idSocio);
-
+    var pagamentosAtuais = pageSocio.pagamentos;
+    var exclui = true;
+    console.log(pagamentosAtuais)
+    for (var i in pagamentosAtuais) {
+        if (idSocio == pagamentosAtuais[i].idcliente) {
+            exclui = false;
+            console.log(pagamentosAtuais[i])
+            swal("", "Não é permitido excluir um sócio que possua pagamento", "error");
+        }
+    }
+    if (exclui) {
+        firebase.database().ref('socios/' + idSocio).remove();
+        swal("", "Sócio excluido", "success");
+        getSocio();
+    }
 }
 
 function limparTabela() {
