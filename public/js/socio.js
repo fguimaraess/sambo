@@ -63,6 +63,7 @@ pageSocio.btnSalvar.addEventListener('click', function () {
     };
 
     if (pageSocio.idSocioField.value) {
+        console.log("entrou aqui *")
         salvaAlteracoes(tempSocio);
     } else {
         novoSocio(tempSocio);
@@ -86,20 +87,30 @@ function novoSocio(tempSocio) {
 
 function salvaAlteracoes(tempSocio) {
     idSocio = pageSocio.idSocioField.value;
-    //socioSel = pageSocio.socios[pageSocio.idSocioField.value];
+    tempSocio = {
+        nome: pageSocio.nomeField.value,
+        cpf: pageSocio.cpfField.value,
+        email: pageSocio.emailField.value,
+        telefone: pageSocio.telefoneField.value
+    }
     //Doc do firebase pra atualizar
     firebase.database().ref('socios/' + idSocio).update(tempSocio).then(swal("", "cadastro atualizado com sucesso", "success"));
-    pageSocio.socios[idSocio] = tempSocio;
+    //socioSel = pageSocio.socios[pageSocio.idSocioField.value];
     //Atualiza tela de sócios
     var sociosNaTela = document.querySelectorAll('.sociosTabela');
     sociosNaTela.forEach(function (socioHtml) {
         if (socioHtml.id == idSocio) {
             socioHtml.querySelector('.nomeSocio').innerHTML = tempSocio.nome;
             socioHtml.querySelector('.cpfSocio').innerHTML = tempSocio.cpf;
-            socioHtml.querySelector('.emailSocio').innerHtml = tempSocio.email;
+            socioHtml.querySelector('.emailSocio').innerHTML = tempSocio.email;
             socioHtml.querySelector('.telefoneSocio').innerHTML = tempSocio.telefone
         }
     });
+
+    
+    
+    pageSocio.socios[idSocio] = tempSocio;
+    console.log(tempSocio);
 
 }
 
@@ -199,7 +210,7 @@ function excluirSocio(idSocio) {
     if (exclui) {
         //exclui valor do array socios
         delete pageSocio.socios[idSocio];
-       //excluir o elemento HTML sócio
+        //excluir o elemento HTML sócio
         var tempSocio = pageSocio.bodySocio.querySelector('#' + idSocio)
         firebase.database().ref('socios/' + idSocio).remove();
         swal("", "Sócio excluido", "success");
