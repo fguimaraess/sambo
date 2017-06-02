@@ -24,31 +24,34 @@
                     <span class="card-title">Bem vindo ao Sambo!</span>
                     <p>Faça seu login.
                         <p>
-
+                         <br>
                             <div class="row">
                                 <p>
                                     <form class="col s12">
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                Login: <input type="text" class="validate" id="login-field">
+                                                <i class="material-icons prefix">account_circle</i>
+                                                <input type="text" class="validate" id="login-field" placeholder="Digite seu login">
                                                 <label for="login-field"></label>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                Senha: <input id="password-field" type="password" class="validate">
+                                                <i class="material-icons prefix">vpn_key</i>
+                                                <input id="password-field" type="password" class="validate" placeholder="Digite sua senha">
                                                 <label for="password-field"></label>
                                             </div>
                                         </div>
                                     </form>
                             </div>
+                            <div class="row right-align">Caso não lembre sua senha, clique <a href="#!" id="btn-modal">aqui</a>!</div>
+                            
 
-                </div>
                 <div class="card-action">
                     <a href="#" id='btn-login-field'>Entrar</a>
-                    <!-- Modal Trigger -->
-                    <a href="#!" id="btn-modal">Esqueci a Senha</a>
-                    <!-- Modal Structure -->
+
+                </div> </div>
+                        <!-- Modal Structure -->
                     <div id="modalSenha" class="modal">
                         <div class="modal-content">
                             <h4>Esqueceu sua senha?</h4>
@@ -62,8 +65,10 @@
                         </div>
                         <div class="modal-footer">
                             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" id="btn-reset">Enviar</a>
+
                         </div>
-                    </div>
+                        </div>                    
+                    
                 </div>
             </div>
         </div>

@@ -1,35 +1,25 @@
-body{
-  background-size: cover;
-  background-color: lightblue;
-  min-height: 100vh;
-}
+body {
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+    }
 
-.white-text {
-    color: #fff !important;
-}
+    main {
+      flex: 1 0 auto;
+    }
 
-.login-card{
-  padding-left: 30% !important;
-  padding-right: 25% !important;
-  padding-top: 5% !important;
-}
-
-#btn-login-field{
-  color: white;
-}
-#btn-modal{
-  color: lightblue;
-}
-
+    body {
+      background: #fff;
+    }
 
     .input-field input[type=date]:focus + label,
     .input-field input[type=text]:focus + label,
     .input-field input[type=email]:focus + label,
     .input-field input[type=password]:focus + label {
-      
+      color: #e91e63;
     }
 
-        .input-field input[type=date]:focus,
+    .input-field input[type=date]:focus,
     .input-field input[type=text]:focus,
     .input-field input[type=email]:focus,
     .input-field input[type=password]:focus {
