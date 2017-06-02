@@ -22,6 +22,7 @@ pagePgto.menuPagamentos.addEventListener('click', function () {
     getSocio();
     getPgto();
     getSociosCombo();
+    pagePgto.buscaPgto.value = null;
 })
 
 pagePgto.btnCancelar.addEventListener('click', function () {
