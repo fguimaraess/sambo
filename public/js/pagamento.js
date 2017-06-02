@@ -104,23 +104,24 @@ function getPgto() {
 }
 
 //Verifica isso 
-function getPgtoPorNome(socioPgto) {
-    limparTabela();
-    for (var key1 in pagePgto.pagamento) {
-        var str = pagePgto.pagamentos[key1];
-        var strIdCliente = str.idcliente;
-        console.log(strIdCliente);
+function getPgtoPorNome(nomeSocio) {
+    limparTabelaPgto();
+    for (var key1 in pagePgto.pagamentos) {
+        for (var key2 in pageSocio.socios) {
+            var strPgto = pagePgto.pagamentos[key1];
+            var strIdCliente = strPgto.idcliente;
+
+            var strSocio = pageSocio.socios[key2];
+            var strNomeSocio = strSocio.nome.toLowerCase();
+            if (strNomeSocio.search(nomeSocio.toLowerCase()) != -1) {
+                if (strSocio.uid == strIdCliente) {
+                    pgtoSel = pagePgto.pagamentos[key1];
+                    preencheTabelaPgto(pgtoSel)
+                    console.log(pgtoSel)
+                }
+            }
+        }
     }
-    for (var key2 in pageSocio.socios) {
-        var name = pageSocio.socios[key2];
-        var nameSocio = name.nome.toLowerCase();
-        console.log(nameSocio);
-    }
-    /*var nameSocio = name.nome.toLowerCase();
-    if (strNome.search(socioPgto.toLowerCase()) != -1) {
-        socioPgtoSel = pagePgto.pagamentos[strUid];
-        preencheTabelaPgto(socioPgtoSel);
-    }*/
 }
 
 
