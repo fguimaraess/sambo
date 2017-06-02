@@ -3,7 +3,6 @@ var pagePgto = {
     menuPagamentos: document.querySelector('#pagamentos-dashboard'),
     idPgtoField: document.querySelector('#id-field-Pgto'),
     btnCancelar: document.querySelector('#cancel-card-Pgto'),
-    btnSalvar: document.querySelector('#save-card-Pgto'),
     btnAddPgto: document.querySelector('#addPagto'),
     salvarPgto: document.querySelector('#save-card-Pgto'),
     socioPgtoField: document.querySelector('#sociopgto-field'),
@@ -13,6 +12,8 @@ var pagePgto = {
     btnBuscaPgto: document.querySelector("#busca-pgto-btn"),
     btnClearPgto: document.querySelector("#apagar-busca-pgto-btn"),
     buscaPgto: document.querySelector("#busca-pgto-field"),
+    tabelaPgto: document.querySelector("#table-pgto"),
+    bodyPgto: document.querySelector("#body-pgto")
 
 }
 
@@ -35,6 +36,17 @@ pagePgto.btnAddPgto.addEventListener('click', function () {
     abreCardPgto(null);
 });
 
+pagePgto.btnBuscaPgto.addEventListener('click', function () {
+    getPgtoPorNome(pagePgto.buscaPgto.value);
+});
+
+//Apagar busca
+/*pageSocio.btnClearPgto.addEventListener('click', function () {
+    pageSocio.buscaPgto.value = "";
+    getPgtoPorNome(pageSocio.buscaPgto.value);
+});*/
+
+
 pagePgto.salvarPgto.addEventListener('click', function () {
     var tempPag = {
         uid: pagePgto.idPgtoField.value,
@@ -50,7 +62,6 @@ pagePgto.salvarPgto.addEventListener('click', function () {
     }
     $('#campos-Pgto').show();
     $('#cardAddPgto').hide();
-    getPgto();
 });
 
 
@@ -60,6 +71,7 @@ function novoPagamento(tempPag) {
     } else {
         swal("", "Pagamento cadastrado com sucessso", "success");
         firebase.database().ref('pagamentos/').push(tempPag);
+        getPgto();
     }
 
 }
@@ -67,7 +79,6 @@ function novoPagamento(tempPag) {
 function salvaAltPag(tempPag) {
     idPgto = pagePgto.idPgtoField.value;
     firebase.database().ref('pagamentos/' + idPgto).update(tempPag).then(swal("", "Pagamento atualizado com sucesso", "success"));
-    //console.log(pagePgto.idPgtoField.value);
     pagePgto.pagamentos[idPgto] = tempPag;
     var pagNaTela = document.querySelectorAll('.pgtosTabela');
     pagNaTela.forEach(function (pagtoHtml) {
@@ -90,19 +101,32 @@ function getPgto() {
             preencheTabelaPgto(tempPag);
         })
     })
-    /*var pagamentos = pageSocio.pagamentos;
-    //console.log(pageSocio.pagamentos)
-    for(var key in pagamentos){
-        preencheTabelaPgto(pagamentos[key]);
+}
+
+//Verifica isso 
+function getPgtoPorNome(socioPgto) {
+    limparTabela();
+    for (var key1 in pagePgto.pagamento) {
+        var str = pagePgto.pagamentos[key1];
+        var strIdCliente = str.idcliente;
+        console.log(strIdCliente);
+    }
+    for (var key2 in pageSocio.socios) {
+        var name = pageSocio.socios[key2];
+        var nameSocio = name.nome.toLowerCase();
+        console.log(nameSocio);
+    }
+    /*var nameSocio = name.nome.toLowerCase();
+    if (strNome.search(socioPgto.toLowerCase()) != -1) {
+        socioPgtoSel = pagePgto.pagamentos[strUid];
+        preencheTabelaPgto(socioPgtoSel);
     }*/
 }
 
 
-//function getPgtoPorNome(nome)
-
 function preencheTabelaPgto(tempPag) {
     socioSel = pageSocio.socios[tempPag.idcliente]
-    console.log(tempPag.uid)
+    //console.log(socioSel.nome + " - " + socioSel.cpf);
     var html = '';
     html += '<tr class="pgtosTabela" id="' + tempPag.uid + '">';
     html += '<td class="nomeClientePgto">' + socioSel.nome + " - " + socioSel.cpf + '</td>';
@@ -115,8 +139,11 @@ function preencheTabelaPgto(tempPag) {
 }
 
 function excluirPgto(idPgto) {
+    var tempPag = pagePgto.bodyPgto.querySelector('#' + idPgto)
+    console.log(idPgto)
     firebase.database().ref('pagamentos/' + idPgto).remove();
     swal("", "Pagamento excluído", "success");
+    pagePgto.bodyPgto.removeChild(tempPag);
 }
 
 function limparTabelaPgto() {
@@ -131,7 +158,6 @@ function getSociosCombo() {
     var tempSocio = [];
     tempSocio = pageSocio.socios;
     for (var key in tempSocio) {
-        //console.log(tempSocio[key])
         preencheCombo(tempSocio[key]);
     }
 }
@@ -150,9 +176,7 @@ function abreCardPgto(idPgto) {
     $('#campos-Pgto').hide();
     if (idPgto) {
         pgtoSel = pagePgto.pagamentos[idPgto]
-        console.log(pgtoSel)
         socioSele = pageSocio.socios[pgtoSel.idcliente]
-        console.log(socioSele)
         pagePgto.idPgtoField.value = pgtoSel.uid;
         pagePgto.valorField.value = pgtoSel.valor;
         pagePgto.referenteField.value = pgtoSel.mesreferente;
