@@ -41,10 +41,10 @@ pagePgto.btnBuscaPgto.addEventListener('click', function () {
 });
 
 //Apagar busca
-/*pageSocio.btnClearPgto.addEventListener('click', function () {
-    pageSocio.buscaPgto.value = "";
-    getPgtoPorNome(pageSocio.buscaPgto.value);
-});*/
+pagePgto.btnClearPgto.addEventListener('click', function () {
+    pagePgto.buscaPgto.value = "";
+    getPgtoPorNome(pagePgto.buscaPgto.value);
+});
 
 
 pagePgto.salvarPgto.addEventListener('click', function () {
