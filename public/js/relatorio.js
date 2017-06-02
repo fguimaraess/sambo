@@ -1,20 +1,48 @@
-/*var pageRelatorio = {
-    socioComboRelatorio: document.querySelector('#socio-combo-relatorio'),
+var pageRelatorio = {
+    socioCombo: document.querySelector('#socio-combo'),
+    relatorioSideBtn: document.querySelector('#relatorios-dashboard'),
     searchBtn: document.querySelector('#search-btn'),
-    relatorioSideBtn: document.querySelector('#relatorios-dashboard')
+    bodyRelatorio: document.querySelector('#body-relatorio')
 }
 
-pageRelatorio.relatorioSideBtn.addEventListener('click', getSociosCombo);
-pageRelatorio.searchBtn.addEventListener('click', function () {
+pageRelatorio.relatorioSideBtn.addEventListener('click', function(){
+    getSociosRelatorio();
+});
 
+pageRelatorio.searchBtn.addEventListener('click', function(){
+    var idSocio = pageRelatorio.socioCombo.value;
+    socioSel = pageSocio.socios[idSocio];
+    getPagamentosDoSocio(socioSel);
 })
 
-function getSociosCombo(){
-    $(pageRelatorio.socioComboRelatorio).empty();
+function getPagamentosDoSocio(tempSocio){
+    todosPgtos = pageSocio.pagamentos;
+    for(var key in todosPgtos){
+        if(tempSocio.uid == todosPgtos[key].idcliente)
+        {
+            preencheTabelaRelatorio(tempSocio, todosPgtos[key])
+        }
+    }
+}
+
+function preencheTabelaRelatorio(tempSocio, tempPagamento){
+    var html = '';
+    html += '<tr class="sociosNaTabela" id="' + tempSocio.uid + '">';
+    html += '<td class="nomeCPFSocio">' + tempSocio.nome + " - " + tempSocio.cpf + '</td>';
+    html += '<td class="emailSocio">' + tempSocio.email + '</td>';
+    html += '<td class="dataPgto">' + tempPagamento.datapagamento + '</td>';
+    html += '<td class="mesRef">' + tempPagamento.mesreferente + '</td>';
+    html += '<td class="valorPgto">R$ ' + tempPagamento.valor + '</td>';
+    html += '</tr>'
+    $('#body-relatorio').append(html);
+}
+
+function getSociosRelatorio(){
+    $(pageRelatorio.socioCombo).empty();
     var newOption = document.createElement("option");
     newOption.value = "-";
     newOption.innerHTML = "-";
-    pageRelatorio.socioComboRelatorio.options.add(newOption);
+    pageRelatorio.socioCombo.options.add(newOption);
     var tempSocio = [];
     tempSocio = pageSocio.socios;
     for (var key in tempSocio){
@@ -24,9 +52,9 @@ function getSociosCombo(){
 }
 
 function preencheComboSocio(tempSocio){
-    console.log(tempSocio)
     var newOption = document.createElement("option");
     newOption.value = tempSocio.uid;
-    newOption.innerHTML = tempSocio.nome;
-    pageRelatorio.socioComboRelatorio.options.add(newOption);
-}*/
+    newOption.innerHTML = tempSocio.nome + " - " + tempSocio.cpf;
+    pageRelatorio.socioCombo.options.add(newOption);
+    $(pageRelatorio.socioCombo).material_select();
+}
