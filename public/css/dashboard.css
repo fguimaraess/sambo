@@ -6,7 +6,9 @@ body {
     color: white;
     background-color: #607d8b;
 }
-
+ .editar-socio, .excluir-socio, .editar-pagamento, .excluir-pagamento{
+    color: #607d8b;
+ }
 nav {
     background-color: #607d8b
 

@@ -81,6 +81,7 @@ function salvaAltPag(tempPag) {
     idPgto = pagePgto.idPgtoField.value;
     firebase.database().ref('pagamentos/' + idPgto).update(tempPag).then(swal("", "Pagamento atualizado com sucesso", "success"));
     pagePgto.pagamentos[idPgto] = tempPag;
+    pageSocio.pagamentos[idPgto] = tempPag;
     var pagNaTela = document.querySelectorAll('.pgtosTabela');
     pagNaTela.forEach(function (pagtoHtml) {
         if (pagtoHtml.id == idPgto) {
@@ -99,6 +100,7 @@ function getPgto() {
             var tempPag = pgtoRef.val();
             tempPag.uid = pgtoRef.key;
             pagePgto.pagamentos[pgtoRef.key] = tempPag;
+            pageSocio.pagamentos[pgtoRef.key] = tempPag;
             preencheTabelaPgto(tempPag);
         })
     })
@@ -135,7 +137,7 @@ function preencheTabelaPgto(tempPag) {
     html += '<td class="valorPgto">' + "R$" + tempPag.valor + '</td>';
     html += '<td class="mesPgto">' + tempPag.mesreferente + '</td>';
     html += '<td class="dataPgto">' + tempPag.datapagamento + '</td>';
-    html += '<td><a onclick="abreCardPgto(\'' + tempPag.uid + '\')" href="#" class="editar-socio"><i class="material-icons">mode_edit</i></a>' + '&nbsp;&nbsp;' + '<a onclick="excluirPgto(\'' + tempPag.uid + '\' )" href="#" class="excluir-socio"><i class="material-icons"><i class="material-icons">remove_circle</i></td>';
+    html += '<td><a onclick="abreCardPgto(\'' + tempPag.uid + '\')" href="#" class="editar-pagamento"><i class="material-icons">mode_edit</i></a>' + '&nbsp;&nbsp;' + '<a onclick="excluirPgto(\'' + tempPag.uid + '\' )" href="#" class="excluir-pagamento"><i class="material-icons"><i class="material-icons">remove_circle</i></td>';
     html += '</tr>'
     $('#body-pgto').append(html);
 }
@@ -146,6 +148,9 @@ function excluirPgto(idPgto) {
     firebase.database().ref('pagamentos/' + idPgto).remove();
     swal("", "Pagamento excluído", "success");
     pagePgto.bodyPgto.removeChild(tempPag);
+    //Insere as linhas para remover os pagamentos do objeto
+    delete pagePgto.pagamentos[idPgto];
+    delete pageSocio.pagamentos[idPgto];
 }
 
 function limparTabelaPgto() {
