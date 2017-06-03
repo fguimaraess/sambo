@@ -10,6 +10,7 @@ var pageIndex = {
 
 pageIndex.btnEntrar.addEventListener('click', function () {
     var user = firebase.auth().signInWithEmailAndPassword(pageIndex.loginField.value, pageIndex.passwordField.value).then(function () {
+        console.log(user);
         swal({
             title: "Sambô",
             text: "Você será direcionado para a página principal",
@@ -19,6 +20,7 @@ pageIndex.btnEntrar.addEventListener('click', function () {
             firebase.auth().onAuthStateChanged(function (user) {
                 if (user) {
                     window.location = "/dashboard.html";
+                    
                 } else {
                     window.location = "/index.html";
                 }
