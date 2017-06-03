@@ -232,46 +232,44 @@
                 <p>
                     <div id="campos-relatorio">
                         <div class="row">
-                        <div class="input-field col s6">
-                            <select id="socio-combo">
+                            <div class="input-field col s6">
+                                <select id="socio-combo">
                             <option value="-">Escolha uma opção</option>
                             </select>
-                            <label for="socio-combo">Sócio</label>
+                                <label for="socio-combo">Sócio</label>
                             </div>
                         </div>
 
                         <div class="row">
-                        <div class="input-field col s2">
-                            <input type="date" class="datepicker" id="data-inicio-field">
-                            <label>De: </label>
+                            <div class="input-field col s2">
+                                <input type="date" class="datepicker" id="data-inicio-field">
+                                <label>De: </label>
+                            </div>
+                            <div class="input-field col s2">
+                                <input type="date" class="datepicker" id="data-fim-field">
+                                <label>Até: </label>
+                            </div>
+                            <div class="input-field col s1">
+                                <a class="btn-floating btn-small waves-effect waves-light lightsagreen" id="search-btn"> <i class="material-icons">search</i> </a>
+                            </div>
+                            <div class="input-field col s1">
+                                <a class="btn-floating btn-small lightsagreen" id="limpar-relatorio"> <i class="material-icons">clear</i> </a>
+                            </div>
                         </div>
-                        <div class="input-field col s2">
-                            <input type="date" class="datepicker" id="data-fim-field">
-                            <label>Até: </label>
-                        </div>
-                        <div class="input-field col s1">
-                            <a class="btn-floating btn-small waves-effect waves-light lightsagreen" id="search-btn"> <i class="material-icons">search</i> </a>
-                        </div>
-                        <div class="input-field col s1">
-                            <a class="btn-floating btn-small lightsagreen" id="voltar-relatorio"> <i class="material-icons">arrow_back</i> </a>
-                        </div>
-                        <div class="input-field col s1">
-                            <a class="btn-floating btn-small lightsagreen" id="limpar-relatorio"> <i class="material-icons">clear</i> </a>
-                        </div>
-                    </div>
-
-                    <table id="table-relatorio" class="responsive-table highlight">
-                        <thead>
-                            <tr>
-                                <th>Nome e CPF do Sócio</th>
-                                <th>E-mail do Sócio</th>
-                                <th>Data do Pagamento</th>
-                                <th>Mês Referente</th>
-                                <th>Valor</th>
-                            </tr>
-                        </thead>
-                        <tbody id="body-relatorio"> </tbody>
-                    </table>
+                        <a id="btnExport" class="waves-effect waves-light btn"><i class="material-icons right">file_download</i>Exportar Dados</span></a>
+                        <p>
+                        <table id="table-relatorio" class="responsive-table highlight">
+                            <thead>
+                                <tr>
+                                    <th>Nome e CPF do Sócio</th>
+                                    <th>E-mail do Sócio</th>
+                                    <th>Data do Pagamento</th>
+                                    <th>Mês Referente</th>
+                                    <th>Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody id="body-relatorio"></tbody>
+                        </table>
 
                     </div>
             </div>
