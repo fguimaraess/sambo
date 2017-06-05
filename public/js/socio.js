@@ -131,12 +131,11 @@ function getSocio() {
             var tempSocio = socioRef.val();
             tempSocio.uid = socioRef.key;
             var tempPagamentos = pageSocio.pagamentos;
-            var tempPagamentosFormat = new Date(tempPagamentos[2], tempPagamentos[1] - 1, tempPagamentos[0]);
             tempSocio.ultpgto = "";
-                        for (var key in tempPagamentos) {
+            for (var key in tempPagamentos) {
                 if (tempPagamentos[key].idcliente == tempSocio.uid) {
                     if (tempSocio.ultpgto < tempPagamentos[key].datapagamento);
-                        tempSocio.ultpgto = tempPagamentos[key].datapagamento;
+                    tempSocio.ultpgto = tempPagamentos[key].datapagamento;
                 }
                 pageSocio.socios[socioRef.key] = tempSocio;
             }
