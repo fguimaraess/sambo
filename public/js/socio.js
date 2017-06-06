@@ -108,7 +108,7 @@ function salvaAlteracoes(tempSocio) {
             socioHtml.querySelector('.telefoneSocio').innerHTML = tempSocio.telefone
         }
     });
-
+    
     pageSocio.socios[idSocio] = tempSocio;
     console.log(tempSocio);
 
@@ -134,8 +134,12 @@ function getSocio() {
             tempSocio.ultpgto = "";
             for (var key in tempPagamentos) {
                 if (tempPagamentos[key].idcliente == tempSocio.uid) {
-                    if (tempSocio.ultpgto < tempPagamentos[key].datapagamento);
-                    tempSocio.ultpgto = tempPagamentos[key].datapagamento;
+                    /*var dataKey = tempPagamentos[key].datapagamento.split("/");
+                    var dataKeyFormatada = new Date(dataKey[2], dataKey[1]-1, dataKey[0]);
+                    var dataSocio = tempSocio.ultpgto.split("/");
+                    var dataSocioFormatada = new Date(dataSocio[2], dataSocio[1]-1, dataSocio[0]);*/
+                    if (tempPagamentos[key].datapagamento >= tempSocio.ultpgto);
+                        tempSocio.ultpgto = tempPagamentos[key].datapagamento;
                 }
                 pageSocio.socios[socioRef.key] = tempSocio;
             }
