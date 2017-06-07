@@ -9,11 +9,18 @@ body {
  .editar-socio, .excluir-socio, .editar-pagamento, .excluir-pagamento{
     color: #607d8b;
  }
+
 nav {
     background-color: #607d8b
-
 }
 
 nav .brand-logo {
     color: white;
+}
+
+.collection .collection-item.avatar {
+    background-color: lightblue;
+}
+a#socios-dashboard, a#pagamentos-dashboard, a#relatorios-dashboard {
+    color: grey;
 }

@@ -42,16 +42,40 @@
 
     <div class="row" style="padding-top: 30px;">
         <!--Menu Lateral-->
-        <div id="menu-lateral" class="col s3">
+        <div id="menu-lateral" class="col s2">
             <ul class="collection">
-                <a href="#" class="collection-item" id="socios-dashboard">Sócios</a>
-                <a href="#" class="collection-item" id="pagamentos-dashboard">Pagamentos</a>
-                <a href="#" class="collection-item" id="relatorios-dashboard">Relatórios</a>
+                <!-- Antigo Menu Lateral
+                <a href="#" class="collection-item" >Sócios</a>
+                <a href="#" class="collection-item" >Pagamentos</a>
+                <a href="#" class="collection-item" >Relatórios</a>
+                -->
+                <li class="collection-item avatar">
+                    <i class="material-icons circle lightblue">people</i>
+                    <a href="#!" id="socios-dashboard">
+                    <span class="title"></span>
+                    Sócios</a>
+                    <a href="#!" class="secondary-content"></a>
+                </li>
+                <li class="collection-item avatar">
+                    <i class="material-icons circle lightblue">attach_money</i>
+                    <a href="#!" id="pagamentos-dashboard">
+                    <span class="title"></span>
+                    Pagamentos</a>
+                    <a href="#!" class="secondary-content"></a>
+                </li>
+
+                <li class="collection-item avatar">
+                    <i class="material-icons circle lightblue">insert_chart</i>
+                    <a href="#!" id="relatorios-dashboard">
+                    <span class="title"></span>
+                    Relatórios</a>
+                    <a href="#!" class="secondary-content"></a>
+                </li>
             </ul>
         </div>
 
 
-        <div id="content-page" class="col s9">
+        <div id="content-page" class="col s10">
 
 
             <div class="socio-div" hidden>
@@ -59,23 +83,29 @@
                 <div id="campos-socio">
                     <div class="row" id="busquinha">
                         <div class="col s12">
-                            <div class="input-field col s8">
+                            <div class="input-field col s6">
                                 <input type="text" id="busca-socio-field">
                                 <label for="busca-socio-field">
                                 Buscar Sócio
                                 </label>
                             </div>
                             <div class="input-field col s1">
-                                <a href="#" class="btn-floating btn-small waves-effect waves-light blue-grey" id="busca-socio-btn">
+                                <a href="#" class="waves-effect waves-light btn blue-grey" id="busca-socio-btn">
                                     <i class="material-icons">search</i>
                                 </a>
                             </div>
 
                             <div class="input-field col s1">
-                                <a href="#" class="btn-floating btn-small waves-effect waves-light blue-grey" id="apagar-busca-socio-btn">
+                                <a href="#" class="waves-effect waves-light btn blue-grey" id="apagar-busca-socio-btn">
                                     <i class="material-icons">clear</i>
                                 </a>
                             </div>
+
+                            <div class="right-align col s4">
+                        <a class="waves-effect waves-light btn-large blue-grey" href="#" id="addSocio">
+                            Novo Sócio<i class="material-icons right">add</i>
+                        </a>
+                    </div>
                         </div>
                     </div>
                     <table class="display highlight" id="table-socio">
@@ -94,11 +124,7 @@
                         <tbody id="body-socio">
                         </tbody>
                     </table>
-                    <div class="right-align">
-                        <a class="btn-floating btn-large waves-effect waves-light blue-grey" href="#" id="addSocio">
-                            <i class="material-icons">add</i>
-                        </a>
-                    </div>
+                    
                 </div>
                 <div class="row" id="cardAddsocio" hidden>
                     <div class="col s12 m9">
@@ -150,23 +176,28 @@
                 <div id="campos-Pgto">
                     <div class="row">
                         <div class="col s12">
-                            <div class="input-field col s8">
+                            <div class="input-field col s6">
                                 <input type="text" id="busca-pgto-field" class="validate">
                                 <label class="active" for="busca-pgto-field">
                                 Buscar Pagamento
                                 </label>
                             </div>
                             <div class="input-field col s1">
-                                <a href="#" class="btn-floating btn-small waves-effect waves-light blue-grey" id="busca-pgto-btn">
+                                <a href="#" class="waves-effect waves-light btn blue-grey" id="busca-pgto-btn">
                                     <i class="material-icons">search</i>
                                 </a>
                             </div>
 
                             <div class="input-field col s1">
-                                <a href="#" class="btn-floating btn-small waves-effect waves-light blue-grey" id="apagar-busca-pgto-btn">
+                                <a href="#" class="waves-effect waves-light btn blue-grey" id="apagar-busca-pgto-btn">
                                     <i class="material-icons">clear</i>
                                 </a>
                             </div>
+                            <div class="right-align col s4">
+                        <a class="waves-effect waves-light btn-large blue-grey" href="#" id="addPagto">
+                            Novo Pagamento<i class="material-icons right">add</i>
+                        </a>
+                    </div>
                         </div>
                     </div>
 
@@ -184,11 +215,7 @@
                         <tbody id="body-pgto">
                         </tbody>
                     </table>
-                    <div class="right-align">
-                        <a class="btn-floating btn-large waves-effect waves-light blue-grey" href="#" id="addPagto">
-                            <i class="material-icons">add</i>
-                        </a>
-                    </div>
+                    
                 </div>
                 <div class="row" id="cardAddPgto" hidden>
                     <div class="col s12 m9">
@@ -250,10 +277,10 @@
                                 <label>Até: </label>
                             </div>
                             <div class="input-field col s1">
-                                <a class="btn-floating btn-small waves-effect waves-light blue-grey" id="search-btn"> <i class="material-icons">search</i> </a>
+                                <a class="waves-effect waves-light btn blue-grey" id="search-btn"> <i class="material-icons">search</i> </a>
                             </div>
                             <div class="input-field col s1">
-                                <a class="btn-floating btn-small blue-grey" id="limpar-relatorio"> <i class="material-icons">clear</i> </a>
+                                <a class="waves-effect waves-light btn blue-grey" id="limpar-relatorio"> <i class="material-icons">clear</i> </a>
                             </div>
                         </div>
                         <a id="btnExport" class="waves-effect waves-light btn blue-grey"><i class="material-icons right">file_download</i>Exportar Dados</span></a>
