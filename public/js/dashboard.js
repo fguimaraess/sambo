@@ -9,7 +9,7 @@ var pageDash = {
 }
 
 window.addEventListener('load', function () {
-    getSocio();
+    //getSocio();
     getPagamentosSocios();
 
     //Traz o usuário que está autenticado no momento

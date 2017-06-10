@@ -23,8 +23,8 @@ window.addEventListener('load', function () {
 });
 
 pageSocio.btnSocioMenu.addEventListener('click', function () {
-    getSocio();
-    //getPagamentosSocios();
+    //getSocio();
+    getPagamentosSocios();
     pageSocio.buscaSocio.value = null;
 })
 
@@ -171,8 +171,7 @@ function preencheTabela(tempSocio) {
     html += '<td class="cpfSocio">' + tempSocio.cpf + '</td>';
     html += '<td class="nomeSocio">' + tempSocio.nome + '</td>';
     html += '<td class="emailSocio">' + tempSocio.email + '</td>';
-    html += '<td class="telefoneSocio">' + tempSocio.telefone + '</td>';
-    //html += '<td class="dataSocio">' + tempSocio.datanascimento + '</td>';
+    html += '<td class="telefoneSocio">' + tempSocio.telefone + '</td>';    
     html += '<td class="ultPgto">' + tempSocio.ultpgto + '</td>';
     html += '<td><a onclick="abreCardSocio(\'' + tempSocio.uid + '\')" href="#" class="editar-socio"><i class="material-icons">mode_edit</i></a>' + '&nbsp;&nbsp;' + '<a onclick="excluirSocio(\'' + tempSocio.uid + '\' )" href="#" class="excluir-socio"><i class="material-icons"><i class="material-icons">remove_circle</i></td>';
     html += '</tr>'

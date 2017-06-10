@@ -73,6 +73,7 @@ function novoPagamento(tempPag) {
         swal("", "Pagamento cadastrado com sucessso", "success");
         firebase.database().ref('pagamentos/').push(tempPag);
         getPgto();
+        getSocio();
     }
 
 }
@@ -91,6 +92,7 @@ function salvaAltPag(tempPag) {
             pagtoHtml.querySelector('.dataPgto').innerHTML = tempPag.datapagamento;
         }
     });
+    getSocio();
 }
 
 function getPgto() {
@@ -151,6 +153,7 @@ function excluirPgto(idPgto) {
     //Insere as linhas para remover os pagamentos do objeto
     delete pagePgto.pagamentos[idPgto];
     delete pageSocio.pagamentos[idPgto];
+    getSocio();
 }
 
 function limparTabelaPgto() {
