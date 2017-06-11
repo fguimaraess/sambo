@@ -1,14 +1,22 @@
 body {
-    background-color: whitesmoke;
+    background-color: white;
+}
+
+.collection {
+    border: 1px solid white;
 }
 
 .collection a.collection-item {
     color: white;
     background-color: #607d8b;
 }
- .editar-socio, .excluir-socio, .editar-pagamento, .excluir-pagamento{
+
+.editar-socio,
+.excluir-socio,
+.editar-pagamento,
+.excluir-pagamento {
     color: #607d8b;
- }
+}
 
 nav {
     background-color: #607d8b
@@ -19,8 +27,15 @@ nav .brand-logo {
 }
 
 .collection .collection-item.avatar {
-    background-color: lightblue;
+    background-color: white;
 }
-a#socios-dashboard, a#pagamentos-dashboard, a#relatorios-dashboard {
+
+a#socios-dashboard,
+a#pagamentos-dashboard,
+a#relatorios-dashboard {
     color: grey;
+}
+
+.collection .collection-item {
+        border-bottom: 1px solid white;
 }
