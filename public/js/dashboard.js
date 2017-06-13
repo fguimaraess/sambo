@@ -17,7 +17,7 @@ window.addEventListener('load', function () {
         if (user) {
             pageDash.usuarioLogado.innerHTML = user.email;
         } else {
-            pageDash.usuarioLogado.innerHTML = 'Usuário'
+            window.location = "/index.html";
         }
     });
 
